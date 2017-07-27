@@ -29,7 +29,7 @@
 	    </mvc:message-converters>
 	</mvc:annotation-driven>
 	
-    <context:component-scan base-package = "mx.com.example.test.config" />
+    <context:component-scan base-package = "mx.com.example.test" />
 
  	<bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
       <property name = "prefix" value = "/jsp/" />

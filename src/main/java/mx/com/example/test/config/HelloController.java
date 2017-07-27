@@ -27,13 +27,15 @@ public class HelloController {
 	
 	
 	@RequestMapping(value = { "/rest" }, method = RequestMethod.POST)
-	public BeanResponse restPage(@RequestBody BeanResponse bean) {
+	public String restPage(@RequestBody BeanResponse bean) {
 		System.out.println(bean.getNombre() + " " + bean.getId());
-		return new BeanResponse(1, "Julio perez");
+		//return new BeanResponse(1, "Julio perez");
+		return "response";
 	}
 	
 	@RequestMapping(value = { "/rest2" }, method = RequestMethod.GET)
 	public BeanResponse restPage2() {
+		System.out.println("restPage2");
 		return new BeanResponse(1, "Julio perez");
 	}
 	

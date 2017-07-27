@@ -8,10 +8,10 @@
     <title>Insert title here</title>
   </head>
   <body>
-    <form:form method = "POST" action="student/save" modelAttribute="student">
+    <form:form method = "POST" action="save">
       Student Id : <form:input path="studentId"/><br>
       Student Name: <form:input path="studentName"/><br>
-      <input type="submit">
+      <input type="submit" value="submit">
     </form:form>
   </body>
 </html>
