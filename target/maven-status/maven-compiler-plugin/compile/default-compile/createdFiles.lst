@@ -1,0 +1,5 @@
+mx/com/example/test/App.class
+mx/com/example/test/dto/Student.class
+mx/com/example/test/config/HelloController$BeanResponse.class
+mx/com/example/test/config/HelloController.class
+mx/com/example/test/controller/StudentFormController.class
