@@ -3,6 +3,7 @@ package mx.com.example.test.config;
 
 import java.io.Serializable;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,15 +15,18 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 @RequestMapping(value = "/hello")
 public class HelloController {
-	
+
+	final static Logger logger = Logger.getLogger(HelloController.class.getName());
+
 	public HelloController() {
+		logger.info("HelloController - constructor()>>>>>>>>>>>>>>>>>>");
+		logger.error("Error()>>>>>>>>>>>");
 		System.out.println("HelloController - constructor()>>>>>>>>>>>>>>>>>>");
 	}
 	
 	@RequestMapping(value = { "/welcome2" }, method = RequestMethod.GET)
 	public String welcomePage() {
 		return "response";
-
 	}
 	
 	
@@ -55,15 +59,17 @@ public class HelloController {
 		public String getNombre() {
 			return nombre;
 		}
+
 		public void setNombre(String nombre) {
 			this.nombre = nombre;
 		}
+
 		public int getId() {
 			return id;
 		}
+
 		public void setId(int id) {
 			this.id = id;
 		}
-
 	}
 }
