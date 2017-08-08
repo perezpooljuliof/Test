@@ -31,16 +31,26 @@ public class HelloController {
 	
 	
 	@RequestMapping(value = { "/rest" }, method = RequestMethod.POST)
-	public String restPage(@RequestBody BeanResponse bean) {
-		System.out.println(bean.getNombre() + " " + bean.getId());
+	public String restPage(@RequestBody BeanRequest bean) {
+		System.out.println("restPage()>>>>>");
+		System.out.println("bean:" + bean);
+
 		//return new BeanResponse(1, "Julio perez");
 		return "response";
 	}
 	
-	@RequestMapping(value = { "/rest2" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/rest2" }, method = RequestMethod.POST)
 	public BeanResponse restPage2() {
-		System.out.println("restPage2");
-		return new BeanResponse(1, "Julio perez");
+		System.out.println("restPage2()>>>>>");
+		return new BeanResponse(2, "Julio perez");
+	}
+
+	@RequestMapping(value = { "/rest3" }, method = RequestMethod.POST)
+	public BeanResponse restPage3(@RequestBody String bean) {
+		System.out.println("restPage3()>>>>>");
+		System.out.println("bean:" + bean);
+
+		return new BeanResponse(3, "Julio perez");
 	}
 	
 	public class BeanResponse implements Serializable {		
@@ -56,6 +66,36 @@ public class HelloController {
 		}
 		
 		
+		public String getNombre() {
+			return nombre;
+		}
+
+		public void setNombre(String nombre) {
+			this.nombre = nombre;
+		}
+
+		public int getId() {
+			return id;
+		}
+
+		public void setId(int id) {
+			this.id = id;
+		}
+	}
+
+	public class BeanRequest implements Serializable {
+
+		private String nombre;
+		private int id;
+
+		public BeanRequest() {}
+
+		public BeanRequest(int id, String nombre) {
+			this.id = id;
+			this.nombre = nombre;
+		}
+
+
 		public String getNombre() {
 			return nombre;
 		}

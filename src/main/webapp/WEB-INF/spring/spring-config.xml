@@ -27,6 +27,7 @@
 	                </list>
 	            </property>
 	        </bean>
+
 			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 				<property name="objectMapper" ref="objectMapper"/>
 			</bean>
@@ -47,10 +48,6 @@
       <property name = "prefix" value = "/jsp/" />
       <property name = "suffix" value = ".jsp" />
    	</bean>
-
-
-
-
     
     <!--  <import resource="security-config.xml"/> -->
 </beans>
