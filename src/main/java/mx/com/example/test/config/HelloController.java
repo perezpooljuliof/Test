@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping(value = "/hello")
@@ -31,12 +34,11 @@ public class HelloController {
 	
 	
 	@RequestMapping(value = { "/rest" }, method = RequestMethod.POST)
-	public String restPage(@RequestBody BeanRequest bean) {
+	public BeanResponse restPage(@RequestBody BeanRequest bean, HttpServletRequest request) {
 		System.out.println("restPage()>>>>>");
 		System.out.println("bean:" + bean);
 
-		//return new BeanResponse(1, "Julio perez");
-		return "response";
+		return new BeanResponse(1, "Julio perez");
 	}
 	
 	@RequestMapping(value = { "/rest2" }, method = RequestMethod.POST)
@@ -86,14 +88,9 @@ public class HelloController {
 	public class BeanRequest implements Serializable {
 
 		private String nombre;
-		private int id;
+		private String id;
 
 		public BeanRequest() {}
-
-		public BeanRequest(int id, String nombre) {
-			this.id = id;
-			this.nombre = nombre;
-		}
 
 
 		public String getNombre() {
@@ -104,11 +101,11 @@ public class HelloController {
 			this.nombre = nombre;
 		}
 
-		public int getId() {
+		public String getId() {
 			return id;
 		}
 
-		public void setId(int id) {
+		public void setId(String id) {
 			this.id = id;
 		}
 	}

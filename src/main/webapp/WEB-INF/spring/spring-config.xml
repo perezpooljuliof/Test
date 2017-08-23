@@ -16,9 +16,12 @@
 		http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
-
 	<mvc:annotation-driven>
 	    <mvc:message-converters>
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="objectMapper" ref="objectMapper"/>
+			</bean>
+
 	        <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter">
 	            <property name="supportedMediaTypes">
 	                <list>
@@ -27,10 +30,6 @@
 	                </list>
 	            </property>
 	        </bean>
-
-			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-				<property name="objectMapper" ref="objectMapper"/>
-			</bean>
 	    </mvc:message-converters>
 	</mvc:annotation-driven>
 
@@ -39,15 +38,21 @@
 	
     <context:component-scan base-package = "mx.com.example.test" />
 
+
 	<bean id="objectMapper" class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean"
 		  p:indentOutput="true"
 		  p:simpleDateFormat="yyyy-MM-dd"
 		  p:modulesToInstall="com.fasterxml.jackson.module.paramnames.ParameterNamesModule"/>
 
- 	<bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<bean id="csvViewResolver"
+        class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+	    <property name="order" value="1"/>
+	    <property name="basename" value="views"/>
+	</bean>
+
+	<bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
       <property name = "prefix" value = "/jsp/" />
       <property name = "suffix" value = ".jsp" />
    	</bean>
-    
     <!--  <import resource="security-config.xml"/> -->
 </beans>
