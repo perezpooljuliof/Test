@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping(value = "/hello")
@@ -23,7 +24,6 @@ public class HelloController {
 
 	public HelloController() {
 		logger.info("HelloController - constructor()>>>>>>>>>>>>>>>>>>");
-		logger.error("Error()>>>>>>>>>>>");
 		System.out.println("HelloController - constructor()>>>>>>>>>>>>>>>>>>");
 	}
 	
@@ -32,9 +32,8 @@ public class HelloController {
 		return "response";
 	}
 	
-	
 	@RequestMapping(value = { "/rest" }, method = RequestMethod.POST)
-	public BeanResponse restPage(@RequestBody BeanRequest bean, HttpServletRequest request) {
+	public BeanResponse restPage(@RequestBody BeanRequest bean) {
 		System.out.println("restPage()>>>>>");
 		System.out.println("bean:" + bean);
 
@@ -53,6 +52,14 @@ public class HelloController {
 		System.out.println("bean:" + bean);
 
 		return new BeanResponse(3, "Julio perez");
+	}
+
+	@RequestMapping(value = {"/model"}, method = RequestMethod.GET)
+	public ModelAndView model(HttpServletRequest request,
+						 HttpServletResponse response) throws Exception {
+		ModelAndView model = new ModelAndView("hello2");
+
+		return model;
 	}
 	
 	public class BeanResponse implements Serializable {		
