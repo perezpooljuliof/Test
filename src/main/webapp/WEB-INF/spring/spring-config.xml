@@ -18,10 +18,6 @@
 
 	<mvc:annotation-driven>
 	    <mvc:message-converters>
-			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-				<property name="objectMapper" ref="objectMapper"/>
-			</bean>
-
 	        <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter">
 	            <property name="supportedMediaTypes">
 	                <list>
@@ -37,12 +33,6 @@
 
 	
     <context:component-scan base-package = "mx.com.example.test" />
-
-
-	<bean id="objectMapper" class="org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean"
-		  p:indentOutput="true"
-		  p:simpleDateFormat="yyyy-MM-dd"
-		  p:modulesToInstall="com.fasterxml.jackson.module.paramnames.ParameterNamesModule"/>
 
 	<bean id="csvViewResolver"
         class="org.springframework.web.servlet.view.ResourceBundleViewResolver">

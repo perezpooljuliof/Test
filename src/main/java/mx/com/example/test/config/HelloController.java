@@ -3,6 +3,8 @@ package mx.com.example.test.config;
 
 import java.io.Serializable;
 
+import mx.com.example.test.dto.BeanRequest;
+import mx.com.example.test.dto.BeanResponse;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping(value = "/hello")
 public class HelloController {
 
-	final static Logger logger = Logger.getLogger(HelloController.class.getName());
+	final static Logger logger = Logger.getLogger("");
 
 	public HelloController() {
 		logger.info("HelloController - constructor()>>>>>>>>>>>>>>>>>>");
@@ -35,85 +37,8 @@ public class HelloController {
 	@RequestMapping(value = { "/rest" }, method = RequestMethod.POST)
 	public BeanResponse restPage(@RequestBody BeanRequest bean) {
 		System.out.println("restPage()>>>>>");
-		System.out.println("bean:" + bean);
+		System.out.println("bean:" + bean.getId() + " " + bean.getNombre());
 
 		return new BeanResponse(1, "Julio perez");
-	}
-	
-	@RequestMapping(value = { "/rest2" }, method = RequestMethod.POST)
-	public BeanResponse restPage2() {
-		System.out.println("restPage2()>>>>>");
-		return new BeanResponse(2, "Julio perez");
-	}
-
-	@RequestMapping(value = { "/rest3" }, method = RequestMethod.POST)
-	public BeanResponse restPage3(@RequestBody String bean) {
-		System.out.println("restPage3()>>>>>");
-		System.out.println("bean:" + bean);
-
-		return new BeanResponse(3, "Julio perez");
-	}
-
-	@RequestMapping(value = {"/model"}, method = RequestMethod.GET)
-	public ModelAndView model(HttpServletRequest request,
-						 HttpServletResponse response) throws Exception {
-		ModelAndView model = new ModelAndView("hello2");
-
-		return model;
-	}
-	
-	public class BeanResponse implements Serializable {		
-		
-		private String nombre;
-		private int id;
-		
-		public BeanResponse() {}
-		
-		public BeanResponse(int id, String nombre) {
-			this.id = id;
-			this.nombre = nombre;
-		}
-		
-		
-		public String getNombre() {
-			return nombre;
-		}
-
-		public void setNombre(String nombre) {
-			this.nombre = nombre;
-		}
-
-		public int getId() {
-			return id;
-		}
-
-		public void setId(int id) {
-			this.id = id;
-		}
-	}
-
-	public class BeanRequest implements Serializable {
-
-		private String nombre;
-		private String id;
-
-		public BeanRequest() {}
-
-
-		public String getNombre() {
-			return nombre;
-		}
-
-		public void setNombre(String nombre) {
-			this.nombre = nombre;
-		}
-
-		public String getId() {
-			return id;
-		}
-
-		public void setId(String id) {
-			this.id = id;
-		}
 	}
 }
