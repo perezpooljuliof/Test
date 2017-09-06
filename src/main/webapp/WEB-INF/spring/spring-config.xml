@@ -30,19 +30,15 @@
 	</mvc:annotation-driven>
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
-
 	
     <context:component-scan base-package = "mx.com.example.test" />
-
-	<bean id="csvViewResolver"
-        class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
-	    <property name="order" value="1"/>
-	    <property name="basename" value="views"/>
-	</bean>
 
 	<bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
       <property name = "prefix" value = "/jsp/" />
       <property name = "suffix" value = ".jsp" />
    	</bean>
-    <!--  <import resource="security-config.xml"/> -->
+
+	<import resource="spring-datasource.xml"/>
+
+    <!--  <import resource="spring-security.xml"/> -->
 </beans>
