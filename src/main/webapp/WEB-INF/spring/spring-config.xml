@@ -16,29 +16,10 @@
 		http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
-	<mvc:annotation-driven>
-	    <mvc:message-converters>
-	        <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter">
-	            <property name="supportedMediaTypes">
-	                <list>
-	                    <value>image/jpeg</value>
-	                    <value>image/png</value>
-	                </list>
-	            </property>
-	        </bean>
-	    </mvc:message-converters>
-	</mvc:annotation-driven>
-
-	<mvc:resources mapping="/resources/**" location="/resources/" />
-	
     <context:component-scan base-package = "mx.com.example.test" />
 
-	<bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
-      <property name = "prefix" value = "/jsp/" />
-      <property name = "suffix" value = ".jsp" />
-   	</bean>
-
 	<import resource="spring-datasource.xml"/>
+	<import resource="spring-mvc.xml"/>
 
     <!--  <import resource="spring-security.xml"/> -->
 </beans>
