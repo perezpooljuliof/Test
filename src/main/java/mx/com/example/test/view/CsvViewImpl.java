@@ -1,4 +1,4 @@
-package mx.com.example.test.controller;
+package mx.com.example.test.view;
 
 
 import java.io.IOException;
@@ -6,10 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 
-
 import org.supercsv.io.ICsvBeanWriter;
 
-import mx.com.example.test.dto.Book;
+import mx.com.example.test.dto.bean.Book;
 
 /**
 * An implementation of the AbstractCsvView.

@@ -1,4 +1,4 @@
-package mx.com.example.test.config;
+package mx.com.example.test.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 @RequestMapping(value = "/page")
-public class ModelController {
+public class SprinWebController {
 
     @RequestMapping(value = {"/hello2"}, method = RequestMethod.GET)
     public String sayHello2(ModelMap model) throws Exception {

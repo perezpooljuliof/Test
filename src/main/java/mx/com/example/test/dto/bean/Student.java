@@ -1,4 +1,4 @@
-package mx.com.example.test.dto;
+package mx.com.example.test.dto.bean;
 
 public class Student {
 	private int studentId;

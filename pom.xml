@@ -104,6 +104,20 @@
             <version>${spring.version}</version>
         </dependency>
 
+        <!-- Spring ORM -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+
         <!-- Spring Security -->
         <dependency>
              <groupId>org.springframework.security</groupId>

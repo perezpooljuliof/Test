@@ -1,4 +1,4 @@
-package mx.com.example.test.controller;
+package mx.com.example.test.view;
 
 import java.io.IOException;
 import java.util.Map;
