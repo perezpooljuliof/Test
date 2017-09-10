@@ -19,6 +19,7 @@
 
 	<import resource="spring-datasource.xml"/>
 	<import resource="spring-mvc.xml"/>
+	<import resource="spring-hibernate.xml"/>
 
     <!--  <import resource="spring-security.xml"/> -->
 </beans>

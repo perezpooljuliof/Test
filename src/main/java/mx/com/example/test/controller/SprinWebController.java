@@ -18,8 +18,6 @@ public class SprinWebController {
 
     @RequestMapping(value = {"/hello2"}, method = RequestMethod.GET)
     public String sayHello2(ModelMap model) throws Exception {
-        //ModelAndView model = new ModelAndView("hello2");
-
         return "hello2";
     }
 }
