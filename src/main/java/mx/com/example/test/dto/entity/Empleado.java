@@ -1,9 +1,6 @@
 package mx.com.example.test.dto.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by elver on 9/09/17.
@@ -15,9 +12,11 @@ public class Empleado {
     private String nombre;
 
     @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
@@ -26,6 +25,7 @@ public class Empleado {
     public String getNombre() {
         return nombre;
     }
+
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
