@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 		xmlns:context="http://www.springframework.org/schema/context"
-		xmlns:p="http://www.springframework.org/schema/p" 
 		xmlns:mvc="http://www.springframework.org/schema/mvc" 
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xmlns:aop="http://www.springframework.org/schema/aop"
@@ -16,33 +15,11 @@
 		http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
-	<mvc:annotation-driven>
-	    <mvc:message-converters>
-	        <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter">
-	            <property name="supportedMediaTypes">
-	                <list>
-	                    <value>image/jpeg</value>
-	                    <value>image/png</value>
-	                </list>
-	            </property>
-	        </bean>
-	    </mvc:message-converters>
-	</mvc:annotation-driven>
-
-	<mvc:resources mapping="/resources/**" location="/resources/" />
-
-	
     <context:component-scan base-package = "mx.com.example.test" />
 
-	<bean id="csvViewResolver"
-        class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
-	    <property name="order" value="1"/>
-	    <property name="basename" value="views"/>
-	</bean>
+	<import resource="spring-datasource.xml"/>
+	<import resource="spring-mvc.xml"/>
+	<import resource="spring-hibernate.xml"/>
 
-	<bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
-      <property name = "prefix" value = "/jsp/" />
-      <property name = "suffix" value = ".jsp" />
-   	</bean>
-    <!--  <import resource="security-config.xml"/> -->
+    <!--  <import resource="spring-security.xml"/> -->
 </beans>

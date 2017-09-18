@@ -19,6 +19,7 @@
         <spring.version>4.2.3.RELEASE</spring.version>
         <spring.security.version>4.2.3.RELEASE</spring.security.version>
         <jstl.version>1.2</jstl.version>
+        <hibernate-version>5.2.1.Final</hibernate-version>
     </properties>
   
 
@@ -67,8 +68,7 @@
             <version>2.5.3</version>
         </dependency>
 
-
-        <!-- Dependendy Injection -->
+        <!-- Spring core -->
         <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
@@ -104,6 +104,20 @@
             <version>${spring.version}</version>
         </dependency>
 
+        <!-- Spring ORM -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+
         <!-- Spring Security -->
         <dependency>
              <groupId>org.springframework.security</groupId>
@@ -128,7 +142,8 @@
             <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
-        
+
+        <!-- Excel -->
         <dependency>
 		  <groupId>org.apache.poi</groupId>
 		  <artifactId>poi-ooxml</artifactId>
@@ -139,6 +154,28 @@
 		    <artifactId>super-csv</artifactId>
 		    <version>2.1.0</version>
 		</dependency>
+
+        <!-- DataBase Pool -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+
+        <!-- Mysql -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.39</version>
+        </dependency>
+
+        <!-- ORM -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate-version}</version>
+        </dependency>
+
 		<!-- CGLib for @Configuration -->
 		<dependency>
 			<groupId>cglib</groupId>
