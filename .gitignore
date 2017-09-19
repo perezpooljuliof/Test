@@ -7,4 +7,5 @@
 target/
 target/*
 *.idea
+*.settings
 .directory
