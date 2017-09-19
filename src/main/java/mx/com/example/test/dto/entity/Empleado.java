@@ -12,7 +12,8 @@ public class Empleado {
     private String nombre;
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     public int getId() {
         return id;
     }
@@ -22,6 +23,7 @@ public class Empleado {
     }
 
 
+    @Column(name = "nombre")
     public String getNombre() {
         return nombre;
     }

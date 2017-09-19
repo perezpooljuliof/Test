@@ -47,7 +47,7 @@ public class SprinRestController {
 	}
 
 	@RequestMapping(value = { "/insertaEmpleado" }, method = RequestMethod.POST)
-	public List<Empleado> insertaEmpleado(@RequestBody EmpleadoBeanRequest empleadoBeanRequest) {
+	public List<Empleado> insertaEmpleado(@RequestBody EmpleadoBeanRequest empleadoBeanRequest) throws Exception {
         logger.info("insertaEmpleado()>>>>>");
         logger.info("empleadoBeanRequest:" + empleadoBeanRequest.getId() + " " + empleadoBeanRequest.getNombre());
 		return empleadoService.insertAndGet(empleadoBeanRequest);
