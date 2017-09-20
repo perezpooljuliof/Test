@@ -4,8 +4,6 @@ import mx.com.example.test.dao.EmpleadoDAO;
 import mx.com.example.test.dto.entity.Empleado;
 import mx.com.example.test.dto.request.EmpleadoBeanRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +13,7 @@ import java.util.List;
 /**
  * Created by elver on 10/09/17.
  */
-@Repository
+@Service
 public class EmpleadoService {
     @Autowired
     private EmpleadoDAO empleadoDAO;
@@ -24,7 +22,7 @@ public class EmpleadoService {
         return empleadoDAO.getAll();
     }
 
-    @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRES_NEW)
+    @Transactional(rollbackFor = Exception.class)
     public List<Empleado> insertAndGet(EmpleadoBeanRequest empleadoBeanRequest) throws Exception {
         Empleado empleado = new Empleado();
         empleado.setNombre(empleadoBeanRequest.getNombre());
@@ -39,5 +37,5 @@ public class EmpleadoService {
 
         return getAll();
     }
-
 }
+

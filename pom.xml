@@ -19,7 +19,7 @@
         <spring.version>4.2.3.RELEASE</spring.version>
         <spring.security.version>4.2.3.RELEASE</spring.security.version>
         <jstl.version>1.2</jstl.version>
-        <hibernate-version>5.2.1.Final</hibernate-version>
+        <hibernate-version>4.3.8.Final</hibernate-version>
     </properties>
   
 

@@ -1,11 +1,12 @@
 package mx.com.example.test.dao;
 
 import mx.com.example.test.dto.entity.Empleado;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.apache.log4j.Logger;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class EmpleadoDAO {
         return query.list();
     }
 
+    @Transactional
     public void insert(Empleado empleado) {
         logger.info("insert");
         sessionFactory.openSession().save(empleado);
