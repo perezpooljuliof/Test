@@ -5,7 +5,7 @@ import mx.com.example.test.dto.entity.Empleado;
 import mx.com.example.test.dto.request.BeanRequest;
 import mx.com.example.test.dto.request.EmpleadoBeanRequest;
 import mx.com.example.test.dto.response.BeanResponse;
-import mx.com.example.test.service.jpa.EmpleadoService;
+import mx.com.example.test.service.hibernate.EmpleadoService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -15,7 +15,7 @@
 		http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
 
-    <context:component-scan base-package = "mx.com.example.test.service.jpa,mx.com.example.test.dao.jpa" />
     <import resource="spring-datasource.xml"/>
-    <import resource="spring-jpa.xml"/>
+    <!-- <import resource="spring-jpa.xml"/> -->
+    <import resource="spring-hibernate.xml"/>
 </beans>
