@@ -30,9 +30,11 @@ public class EmpleadoService {
 
 
         boolean isTrue = true;
+
         if(isTrue) {
             throw new Exception("Error generado");
         }
+
 
 
         return getAll();
