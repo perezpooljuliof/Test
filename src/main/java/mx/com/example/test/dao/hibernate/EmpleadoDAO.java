@@ -1,4 +1,4 @@
-package mx.com.example.test.dao;
+package mx.com.example.test.dao.hibernate;
 
 import mx.com.example.test.dto.entity.Empleado;
 import org.hibernate.Query;
