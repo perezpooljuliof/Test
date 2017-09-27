@@ -8,6 +8,7 @@ import mx.com.example.test.dto.response.BeanResponse;
 import mx.com.example.test.service.hibernate.EmpleadoService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,11 +42,13 @@ public class SprinRestController {
 		return new BeanResponse(1, "Julio perez");
 	}
 
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value = { "/listaEmpleados" }, method = RequestMethod.POST)
 	public List<Empleado> listaEmpleados() {
 		return empleadoService.getAll();
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = { "/insertaEmpleado" }, method = RequestMethod.POST)
 	public List<Empleado> insertaEmpleado(@RequestBody EmpleadoBeanRequest empleadoBeanRequest) throws Exception {
         logger.info("insertaEmpleado()>>>>>");

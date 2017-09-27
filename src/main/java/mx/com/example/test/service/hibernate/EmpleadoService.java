@@ -28,13 +28,13 @@ public class EmpleadoService {
         empleado.setNombre(empleadoBeanRequest.getNombre());
         empleadoDAO.insert(empleado);
 
-
+        /*
         boolean isTrue = true;
 
         if(isTrue) {
             throw new Exception("Error generado");
         }
-
+        */
 
 
         return getAll();
