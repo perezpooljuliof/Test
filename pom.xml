@@ -144,13 +144,15 @@
         </dependency>
 
         <!-- Excel -->
-
-
-
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.17</version>
+        </dependency>
         <dependency>
 		  <groupId>org.apache.poi</groupId>
 		  <artifactId>poi-ooxml</artifactId>
-		  <version>3.16</version>
+		  <version>3.17</version>
 		</dependency>
 		<dependency>
 		    <groupId>net.sf.supercsv</groupId>
@@ -178,7 +180,6 @@
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate-version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
@@ -193,6 +194,18 @@
 			<version>2.2.2</version>
 			<scope>runtime</scope>
 		</dependency>
+
+        <!-- JavaMail -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>javax.mail-api</artifactId>
+            <version>1.6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.0</version>
+        </dependency>
     </dependencies>
   
     <build>
