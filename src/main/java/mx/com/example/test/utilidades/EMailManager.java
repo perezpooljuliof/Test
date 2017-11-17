@@ -20,8 +20,7 @@ public class EMailManager {
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
 
-        session = Session.getInstance(props,
-        new javax.mail.Authenticator() {
+        session = Session.getInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication("pruebasjfpp@gmail.com", "PruebasDimex");
             }
