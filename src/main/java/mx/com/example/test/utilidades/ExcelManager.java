@@ -91,7 +91,7 @@ public class ExcelManager {
         try {
             File file = new File("/home/cardinal/Descargas/WSPromotoresReferenciados.xlsx");
             //List contenido = ExcelManager.read(file);
-            ExcelManager.write(file);
+            //ExcelManager.write(file);
         }
         catch (Exception e) {
             e.printStackTrace();

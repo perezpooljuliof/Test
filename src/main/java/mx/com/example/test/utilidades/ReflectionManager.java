@@ -88,11 +88,6 @@ public class ReflectionManager {
     }
 
     public static void main(String[] args) throws InvocationTargetException, IllegalAccessException {
-        Empleado empleado = new Empleado();
-        empleado.setId(4);
-        //Object value = getMethodValue(empleado, metodo, null);
-        Object value2 = getProperty(empleado, "id");
-
-        //System.out.println(metodo + " / " + value + " / " + value2);
+    
     }
 }
