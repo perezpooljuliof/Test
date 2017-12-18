@@ -18,4 +18,5 @@
 	<import resource="spring-mvc.xml"/>
 	<import resource="spring-jdbc.xml"/>
     <import resource="spring-security.xml"/>
+	<bean id = "springContextStartedListener" class = "mx.com.example.test.config.SpringContextStartedListener"/>
 </beans>

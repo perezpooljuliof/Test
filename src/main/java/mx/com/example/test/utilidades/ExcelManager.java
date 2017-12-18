@@ -3,18 +3,20 @@ package mx.com.example.test.utilidades;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class ExcelManager {
 
-    public static void read(File xlsxFile) throws IOException {
+    public static List read(File xlsxFile) throws IOException {
+        List contenido = new ArrayList();
 
         FileInputStream fis = new FileInputStream(xlsxFile);
 
@@ -39,26 +41,57 @@ public class ExcelManager {
 
                 switch (cell.getCellType()) {
                     case Cell.CELL_TYPE_STRING:
-                        System.out.print("s:" + cell.getStringCellValue() + "\t");
+                        contenido.add(cell.getStringCellValue());
+                        //System.out.print("s:" + cell.getStringCellValue() + "\t");
                         break;
                     case Cell.CELL_TYPE_NUMERIC:
-                        System.out.print("n:" + cell.getNumericCellValue() + "\t");
+                        contenido.add(cell.getNumericCellValue());
+                        //System.out.print("n:" + cell.getNumericCellValue() + "\t");
                         break;
                     case Cell.CELL_TYPE_BOOLEAN:
-                        System.out.print("b:" + cell.getBooleanCellValue() + "\t");
+                        contenido.add(cell.getBooleanCellValue());
+                        //System.out.print("b:" + cell.getBooleanCellValue() + "\t");
                         break;
                     default :
 
                 }
             }
-            System.out.println("");
         }
+
+        return contenido;
+    }
+
+    public static void write(File xlsxFile, List<List> registros) throws IOException {
+        String nombreHoja1 = "Hoja1";//nombre de la hoja1
+        XSSFWorkbook libroTrabajo = new XSSFWorkbook();
+        XSSFSheet hoja1 = libroTrabajo.createSheet(nombreHoja1) ;
+
+
+        //iterando numero de filas (r)
+        List filas =
+        for (int r=0;r < 5; r++ ) {
+            XSSFRow row = hoja1.createRow(r);
+
+            //iterando numero de columnas (c)
+            for (int c=0;c < 5; c++ ){
+                XSSFCell cell = row.createCell(c);
+                cell.setCellValue("Cell "+r+" "+c);
+            }
+        }
+
+        FileOutputStream fileOut = new FileOutputStream(xlsxFile);
+
+        //escribir este libro en un OutputStream.
+        libroTrabajo.write(fileOut);
+        fileOut.flush();
+        fileOut.close();
     }
 
     public static void main(String[] args) {
         try {
-            File file = new File("/home/cardinal/Descargas/Calendario RDS2.xlsx");
-            ExcelManager.read(file);
+            File file = new File("/home/cardinal/Descargas/WSPromotoresReferenciados.xlsx");
+            //List contenido = ExcelManager.read(file);
+            ExcelManager.write(file);
         }
         catch (Exception e) {
             e.printStackTrace();
