@@ -6,10 +6,12 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class ReflectionManager {
+    /*
     public static Method getMethod(Object instance, String methodName, Class... parametersType) {
         Class classType = instance.getClass();
         return getMethod(classType, methodName, parametersType);
     }
+    /*/
 
     /**
      *
@@ -18,6 +20,7 @@ public class ReflectionManager {
      * @param parametersType
      * @return
      */
+    /*
     public static Method getMethod(Class classType, String methodName, Class... parametersType)  {
         Method metodo = null;
         try {
@@ -29,7 +32,7 @@ public class ReflectionManager {
 
         return metodo;
     }
-
+    */
     /**
      *
      * @param instance
@@ -39,10 +42,12 @@ public class ReflectionManager {
      * @throws InvocationTargetException
      * @throws IllegalAccessException
      */
+    /*
     public static Object getMethodValue(Object instance, Method method, Object... args)
             throws InvocationTargetException, IllegalAccessException {
         return method.invoke(instance, args);
     }
+    */
 
     /**
      * Retrieve a value from a property using
@@ -53,6 +58,7 @@ public class ReflectionManager {
      *  not found or b) if the property is found but the value is null
      * @return THe value of the property
      */
+    /*
     public static <T> T getProperty(Object obj, String property, T defaultValue) {
 
         T returnValue = (T) getProperty(obj, property);
@@ -62,6 +68,7 @@ public class ReflectionManager {
 
         return returnValue;
     }
+    */
 
     /**
      * Fetch a property from an object. For example of you wanted to get the foo
@@ -71,6 +78,7 @@ public class ReflectionManager {
      * @param property The property name
      * @return The value of the property or null if it does not exist.
      */
+    /*
     public static Object getProperty(Object obj, String property) {
         Object returnValue = null;
 
@@ -96,4 +104,5 @@ public class ReflectionManager {
 
         //System.out.println(metodo + " / " + value + " / " + value2);
     }
+    */
 }

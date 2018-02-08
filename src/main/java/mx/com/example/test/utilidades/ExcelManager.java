@@ -3,20 +3,22 @@ package mx.com.example.test.utilidades;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class ExcelManager {
 
-    public static void read(File xlsxFile) throws IOException {
-
+    public static List read(File xlsxFile) throws IOException {
         FileInputStream fis = new FileInputStream(xlsxFile);
+        List data = new ArrayList<>();
+        List dataRow = null;
 
         // Finds the workbook instance for XLSX file
         XSSFWorkbook myWorkBook = new XSSFWorkbook (fis);
@@ -30,6 +32,7 @@ public class ExcelManager {
         // Traversing over each row of XLSX file
         while (rowIterator.hasNext()) {
             Row row = rowIterator.next();
+            dataRow = new ArrayList();
 
             // For each row, iterate through each columns
             Iterator<Cell> cellIterator = row.cellIterator();
@@ -39,26 +42,57 @@ public class ExcelManager {
 
                 switch (cell.getCellType()) {
                     case Cell.CELL_TYPE_STRING:
-                        System.out.print("s:" + cell.getStringCellValue() + "\t");
+                        dataRow.add(cell.getStringCellValue());
                         break;
                     case Cell.CELL_TYPE_NUMERIC:
-                        System.out.print("n:" + cell.getNumericCellValue() + "\t");
+                        dataRow.add(cell.getNumericCellValue());
                         break;
                     case Cell.CELL_TYPE_BOOLEAN:
-                        System.out.print("b:" + cell.getBooleanCellValue() + "\t");
+                        dataRow.add(cell.getBooleanCellValue());
                         break;
-                    default :
-
                 }
             }
-            System.out.println("");
+
+            data.add(dataRow);
         }
+
+        return data;
+    }
+
+    public static void write(File archivo, List<List> data) throws IOException {
+        String nombreHoja1 = "Hoja1";//nombre de la hoja1
+
+        XSSFWorkbook libroTrabajo = new XSSFWorkbook();
+        XSSFSheet hoja1 = libroTrabajo.createSheet(nombreHoja1) ;
+
+
+        //iterando numero de filas (r)
+        for (int r = 0; r < data.size(); r++ ) {
+            XSSFRow row = hoja1.createRow(r);
+
+            List dataRow = data.get(r);
+            //iterando numero de columnas (c)
+            for (int c=0; c < dataRow.size(); c++ ){
+                XSSFCell cell = row.createCell(c);
+                cell.setCellValue(dataRow.get(c).toString());
+            }
+        }
+
+        FileOutputStream fileOut = new FileOutputStream(archivo);
+
+        //escribir este libro en un OutputStream.
+        libroTrabajo.write(fileOut);
+        fileOut.flush();
+        fileOut.close();
     }
 
     public static void main(String[] args) {
         try {
-            File file = new File("/home/cardinal/Descargas/Calendario RDS2.xlsx");
-            ExcelManager.read(file);
+            File file = new File("/home/elver/PruebaExcel.xlsx");
+            File file2 = new File("/home/elver/PruebaExcel2.xlsx");
+            List data = ExcelManager.read(file);
+            System.out.println(data);
+            ExcelManager.write(file2, data);
         }
         catch (Exception e) {
             e.printStackTrace();
