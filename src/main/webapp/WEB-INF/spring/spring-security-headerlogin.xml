@@ -14,15 +14,18 @@
     <global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
 
     <http use-expressions="true" entry-point-ref="customEntryPoint" create-session="stateless">
-        <intercept-url pattern="/rest/**" access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')"/>
-        <http-basic />
-        <csrf disabled="true"/>
-        <logout />
+        <intercept-url pattern="/rest/**" access="isAuthenticated()"/>
+        <custom-filter position="BASIC_AUTH_FILTER" ref="authenticationFilter" />
+
+        <!--<http-basic />--> <!-- For login via HTTP Headers -->
+        <!--<csrf disabled="true"/>-->
     </http>
 
     <beans:bean id="customEntryPoint" class="mx.com.example.test.config.security.CustomBasicAuthenticationEntryPoint">
-        <beans:property name="realmName" value="realmNameTest" />
+        <beans:property name="realmName" value="cardinalRealmName" />
     </beans:bean>
+
+    <beans:bean id="authenticationFilter" class="mx.com.example.test.config.security.DemoAuthenticationFilter"/>
 
     <authentication-manager>
         <authentication-provider>

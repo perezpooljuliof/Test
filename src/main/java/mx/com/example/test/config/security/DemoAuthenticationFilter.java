@@ -1,5 +1,7 @@
 package mx.com.example.test.config.security;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,7 +12,9 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.DatatypeConverter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +26,7 @@ public class DemoAuthenticationFilter extends OncePerRequestFilter {
 
             @Override
             public String getAuthority() {
-                return "ROLE_ADMIN";
+                return "ROLE_NEW";
             }
         });
     }
@@ -31,19 +35,35 @@ public class DemoAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+        System.out.println("DemoAuthenticationFilter.doFilterInternal()>>>>>");
+        String xAuth = request.getHeader("Authenticacion");
+        System.out.println("xAuth:" + xAuth);
 
-        String xAuth = request.getHeader("X-Authorization");
+        //byte[] decodedBytes = Base64.decode(xAuth.getBytes());
+        //String userAndPassword = new String(decodedBytes);
 
+        byte[] encodedHelloBytes = DatatypeConverter.parseBase64Binary(xAuth);
+        String userAndPassword = new String(encodedHelloBytes, StandardCharsets.UTF_8) ;
+
+        //String userAndPassword = StringUtils.newStringUtf8(Base64.decodeBase64(xAuth));
+
+
+        System.out.println("userAndPassword:" + userAndPassword);
+
+        String[] partes = userAndPassword.split(":");
         // validate the value in xAuth
-        if(isValid(xAuth) == false){
+        if(partes.length != 2) {
             throw new SecurityException();
         }
 
+        System.out.println("partes:" + partes[0] + "/" + partes[1]);
+
         // The token is 'valid' so magically get a user id from it
-        Long id = getUserIdFromToken(xAuth);
+        //Long id = getUserIdFromToken(xAuth);
 
         // Create our Authentication and let Spring know about it
-        Authentication auth = new UsernamePasswordAuthenticationToken("jperez", "jperez", AUTHORITIES);;
+        Authentication auth = new UsernamePasswordAuthenticationToken(partes[0], partes[1], AUTHORITIES);
+        System.out.println("auth:" + auth);
         SecurityContextHolder.getContext().setAuthentication(auth);
 
         filterChain.doFilter(request, response);
@@ -53,9 +73,4 @@ public class DemoAuthenticationFilter extends OncePerRequestFilter {
     private boolean isValid(String token) {
         return token != null;
     }
-
-    private Long getUserIdFromToken(String token) {
-        return 1L;
-    }
-
 }
