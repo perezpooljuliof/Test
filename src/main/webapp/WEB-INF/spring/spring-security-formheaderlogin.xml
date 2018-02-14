@@ -16,8 +16,8 @@
     <!-- Solo se llega al entry-point-ref si no se logra la autenticacion desde el filtro -->
     <http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint">
         <intercept-url pattern="/rest/**" access="hasRole('ROLE_USER')"/>
-        <!--Cambio del <http-basic /> -->
-        <custom-filter position="BASIC_AUTH_FILTER" ref="restAuthenticationFilter" />
+        <!--Cambio del <form-login> -->
+        <custom-filter position="FORM_LOGIN_FILTER" ref="jwtAuthenticationFilter" />
         <csrf disabled="true"/>
     </http>
 
@@ -25,9 +25,14 @@
         <beans:property name="realmName" value="cardinalRealmName" />
     </beans:bean>
 
-    <beans:bean id="restAuthenticationFilter" class="mx.com.example.test.config.security.RestAuthenticationFilter"/>
+    <beans:bean id="restAuthenticationSuccessHandler" class="mx.com.example.test.config.security.RestAuthenticationSuccessHandler" />
 
-    <authentication-manager>
+    <beans:bean id="jwtAuthenticationFilter" class="mx.com.example.test.config.security.JwtAuthenticationFilter">
+        <beans:property name="authenticationManager" ref="authenticationManager" />
+        <beans:property name="authenticationSuccessHandler" ref="restAuthenticationSuccessHandler" />
+    </beans:bean>
+
+    <authentication-manager alias="authenticationManager">
         <authentication-provider>
             <user-service id="userService">
                 <user name="admin" password="admin" authorities="ROLE_ADMIN" />

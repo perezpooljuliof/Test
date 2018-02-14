@@ -1,7 +1,5 @@
 package mx.com.example.test.config.security;
 
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.codec.binary.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DemoAuthenticationFilter extends OncePerRequestFilter {
+public class RestAuthenticationFilter extends OncePerRequestFilter {
 
     static final List<GrantedAuthority> AUTHORITIES = new ArrayList<GrantedAuthority>();
     static {
@@ -26,7 +24,7 @@ public class DemoAuthenticationFilter extends OncePerRequestFilter {
 
             @Override
             public String getAuthority() {
-                return "ROLE_NEW";
+                return "ROLE_USER";
             }
         });
     }
@@ -35,7 +33,7 @@ public class DemoAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        System.out.println("DemoAuthenticationFilter.doFilterInternal()>>>>>");
+        System.out.println("RestAuthenticationFilter.doFilterInternal()>>>>>");
         String xAuth = request.getHeader("Authenticacion");
         System.out.println("xAuth:" + xAuth);
 

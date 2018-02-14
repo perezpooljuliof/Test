@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -29,8 +30,10 @@ public class SprinRestController {
 	}
 	
 	@RequestMapping(value = { "/welcome" }, method = RequestMethod.GET)
-	public String welcomePage() {
+	public String welcomePage(HttpSession session) {
 		logger.info("welcomePage()>>>>>");
+		logger.info("success:" + session.getAttribute("success"));
+		session.setAttribute("success" , "successfully accessed");
 		return "response";
 	}
 	
