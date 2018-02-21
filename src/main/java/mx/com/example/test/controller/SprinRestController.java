@@ -38,9 +38,11 @@ public class SprinRestController {
 	}
 	
 	@RequestMapping(value = { "/rest" }, method = RequestMethod.POST)
-	public BeanResponse restPage(@RequestBody BeanRequest bean) {
+	public BeanResponse restPage(@RequestBody BeanRequest bean, HttpSession session) {
 		logger.info("restPage()>>>>>");
 		logger.info("bean:" + bean.getId() + " " + bean.getNombre());
+		logger.info("name:" + session.getAttribute("name"));
+		session.setAttribute("name","restPage");
 
 		return new BeanResponse(1, "Julio perez");
 	}

@@ -46,8 +46,12 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
         String xAuth = request.getHeader("Authenticacion");
         System.out.println("xAuth:" + xAuth);
 
+        Authentication auth = null;
+
         if(xAuth == null) {
-            throw new SecurityException("Error en authenticacion");
+            auth = new UsernamePasswordAuthenticationToken("", "");
+            getAuthenticationManager().authenticate(auth);
+            return auth;
         }
 
         byte[] encodedHelloBytes = DatatypeConverter.parseBase64Binary(xAuth);
@@ -59,12 +63,14 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
         String[] partes = userAndPassword.split(":");
         // validate the value in xAuth
         if(partes.length != 2) {
-            throw new SecurityException("Error en authenticacion");
+            auth = new UsernamePasswordAuthenticationToken("", "");
+            getAuthenticationManager().authenticate(auth);
+            return auth;
         }
         System.out.println("partes:" + partes[0] + "/" + partes[1]);
 
         // Create our Authentication and let Spring know about it
-        Authentication auth = new UsernamePasswordAuthenticationToken(partes[0], partes[1]);
+        auth = new UsernamePasswordAuthenticationToken(partes[0], partes[1]);
         System.out.println("auth:" + auth);
         getAuthenticationManager().authenticate(auth);
 
