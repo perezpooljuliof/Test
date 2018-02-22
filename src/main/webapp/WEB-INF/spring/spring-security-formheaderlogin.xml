@@ -14,13 +14,16 @@
     <global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
 
     <!-- Solo se llega al entry-point-ref si no se logra la autenticacion desde el filtro -->
-    <http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint">
+    <http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint" create-session="stateless">
         <intercept-url pattern="/rest/**" access="hasRole('ROLE_USER')"/>
         <!--Cambio del <form-login> -->
         <custom-filter position="FORM_LOGIN_FILTER" ref="jwtAuthenticationFilter" />
         <csrf disabled="true"/>
     </http>
 
+    <!--<beans:bean id="tokenAuthenticationFilter" class="mx.com.example.test.config.security.TokenAuthenticationFilter" />-->
+
+    <!-- This is where spring sends requests which are not authenticated. -->
     <beans:bean id="restAuthenticationEntryPoint" class="mx.com.example.test.config.security.RestAuthenticationEntryPoint">
         <beans:property name="realmName" value="cardinalRealmName" />
     </beans:bean>
