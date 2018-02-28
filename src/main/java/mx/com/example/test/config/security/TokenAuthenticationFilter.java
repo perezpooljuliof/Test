@@ -1,3 +1,4 @@
+/*
 package mx.com.example.test.config.security;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -61,3 +62,4 @@ public class TokenAuthenticationFilter extends GenericFilterBean {
     }
 
 }
+*/
