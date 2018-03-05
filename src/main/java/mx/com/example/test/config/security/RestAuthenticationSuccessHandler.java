@@ -12,9 +12,16 @@ public class RestAuthenticationSuccessHandler implements AuthenticationSuccessHa
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         // We do not need to do anything extra on REST authentication success, because there is no page to redirect to
         System.out.println("RestAuthenticationSuccessHandler.onAuthenticationSuccess()>>>>>");
-        JwtTokenFactory jwtTokenFactory = new JwtTokenFactory();
-        System.out.println("token:" + jwtTokenFactory.createAccessJwtToken(authentication));
-        System.out.println("refreshToken:" + jwtTokenFactory.createRefreshToken(authentication));
+
+        String token = JwtTokenFactory.createAccessJwtToken(authentication);
+        String refreshToken = JwtTokenFactory.createRefreshToken(authentication);
+
+        response.setHeader("AuthenticationToken" , token);
+        response.setHeader("RefreshToken" , refreshToken);
+
+        System.out.println("token:" + token);
+        System.out.println("refreshToken:" + refreshToken);
+        System.out.println("Authenticacion:" + JwtTokenFactory.getAuthentication(token));
     }
 
 }

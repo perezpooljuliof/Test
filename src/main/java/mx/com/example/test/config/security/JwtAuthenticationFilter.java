@@ -126,7 +126,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
         System.out.println("JwtAuthenticationFilter.successfulAuthentication()>>>>>");
 
         // We set the Authentication token
-        response.setHeader("AuthenticationToken" , authResult.getPrincipal() + ":" + authResult.getCredentials());
+        //response.setHeader("AuthenticationToken" , authResult.getPrincipal() + ":" + authResult.getCredentials());
         // As this authentication is in HTTP header, after success we need to continue the request normally
         // and return the response as if the resource was not secured at all
         chain.doFilter(request, response);
