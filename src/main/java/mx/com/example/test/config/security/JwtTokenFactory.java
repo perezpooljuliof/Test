@@ -5,12 +5,13 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.UUID;
+import java.util.*;
 
 public class JwtTokenFactory {
     private static String tokenIssuer = "jperezp";
@@ -26,11 +27,17 @@ public class JwtTokenFactory {
         if (userContext == null)
             throw new IllegalArgumentException("Cannot create JWT Token without username");
 
+        Object principal = userContext.getPrincipal();
+        List<GrantedAuthority> grantedAuthorities = (List<GrantedAuthority> ) userContext.getAuthorities();
+        String username = (principal instanceof User)?((User) principal).getUsername():principal.toString();
+        List<String> permisos = new ArrayList<>();
+        for(GrantedAuthority authority: grantedAuthorities) {
+            permisos.add(authority.getAuthority());
+        }
 
-        Claims claims = Jwts.claims().setSubject((String) userContext.getPrincipal());
-        System.out.println("Autorities:" + userContext.getAuthorities());
-        claims.put("scopes", userContext.getAuthorities());
 
+        Claims claims = Jwts.claims().setSubject(username);
+        claims.put("scopes", permisos);
         Date currentTime = new Date();
 
         String token = Jwts.builder()
@@ -49,9 +56,12 @@ public class JwtTokenFactory {
             throw new IllegalArgumentException("Cannot create JWT Token without username");
         }
 
+        Object principal = userContext.getPrincipal();
+        String username = (principal instanceof User)?((User) principal).getUsername():principal.toString();
+
         Date currentTime = new Date();
 
-        Claims claims = Jwts.claims().setSubject((String) userContext.getPrincipal());
+        Claims claims = Jwts.claims().setSubject(username);
         claims.put("scopes", Arrays.asList(new String[]{"REFRESH_TOKEN"}));
 
         String token = Jwts.builder()
@@ -67,25 +77,36 @@ public class JwtTokenFactory {
     }
 
     static Authentication getAuthentication(String token) {
+        System.out.println("JwtTokenFactory.getAuthentication()>>>>>");
+        UsernamePasswordAuthenticationToken user = null;
         //String token = request.getHeader(HEADER_STRING);
         if (token != null) {
             // parse the token.
-            /*
-            String user = Jwts.parser()
-                    .setSigningKey(tokenSigningKey)
-                    .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
-                    .getBody()
-                    .getSubject();
-            */
             Jws<Claims> claims = Jwts.parser()
                     .setSigningKey(tokenSigningKey)
                     .parseClaimsJws(token);
 
-            String subject = claims.getBody().getSubject();
-            Object scopes = claims.getBody().get("scopes");
-            System.out.println("subject:" + subject + " scopes:" + scopes);
+            String username = claims.getBody().getSubject();
+            List<String> scopes = (List<String>) claims.getBody().get("scopes");
+            Date expiration = claims.getBody().getExpiration();
+            Date issuedAt = claims.getBody().getIssuedAt();
+
+            List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
+            for(String scope: scopes) {
+                roles.add(new GrantedAuthority(){
+                    @Override
+                    public String getAuthority() {
+                        return scope;
+                    }
+
+                });
+            };
+
+
+            user = new UsernamePasswordAuthenticationToken(username, null, roles);
+            System.out.println("subject:" + username + " scopes:" + scopes + " issuedAt:" + issuedAt + " expiration:" + expiration);
         }
 
-        return null;
+        return user;
     }
 }

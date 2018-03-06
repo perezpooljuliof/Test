@@ -20,8 +20,7 @@ public class RestAuthenticationSuccessHandler implements AuthenticationSuccessHa
         response.setHeader("RefreshToken" , refreshToken);
 
         System.out.println("token:" + token);
-        System.out.println("refreshToken:" + refreshToken);
-        System.out.println("Authenticacion:" + JwtTokenFactory.getAuthentication(token));
+        //System.out.println("refreshToken:" + refreshToken);
     }
 
 }

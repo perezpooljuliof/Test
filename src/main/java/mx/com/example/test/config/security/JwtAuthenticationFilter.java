@@ -48,10 +48,9 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
         Authentication auth = getAuthByToken(request);
         if(auth == null) {
             auth = getAuthByLogin(request);
+            //return a fully populated Authentication object (including granted authorities) if successful.
+            auth = getAuthenticationManager().authenticate(auth);
         }
-
-        System.out.println(auth);
-        getAuthenticationManager().authenticate(auth);
 
         return auth;
     }
@@ -63,8 +62,8 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
      * @return
      */
     private Authentication getAuthByLogin(HttpServletRequest request) {
+        System.out.println("JwtAuthenticationFilter.getAuthByLogin()>>>>>>>>>>>>>>>");
         String xAuth = request.getHeader("Authentication");
-        System.out.println("xAuth:" + xAuth);
 
         Authentication auth = null;
 
@@ -77,9 +76,6 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
         byte[] encodedHelloBytes = DatatypeConverter.parseBase64Binary(xAuth);
         String userAndPassword = new String(encodedHelloBytes, StandardCharsets.UTF_8) ;
 
-
-        System.out.println("userAndPassword:" + userAndPassword);
-
         String[] partes = userAndPassword.split(":");
         // validate the value in xAuth
         if(partes.length != 2) {
@@ -87,11 +83,9 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
             //getAuthenticationManager().authenticate(auth);
             return auth;
         }
-        System.out.println("partes:" + partes[0] + "/" + partes[1]);
 
         // Create our Authentication and let Spring know about it
         auth = new UsernamePasswordAuthenticationToken(partes[0], partes[1]);
-        System.out.println("auth:" + auth);
 
         return auth;
     }
@@ -101,19 +95,14 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
      *
      * @return
      */
-    private AbstractAuthenticationToken getAuthByToken(HttpServletRequest request) {
-        UsernamePasswordAuthenticationToken authentication = null;
+    private Authentication getAuthByToken(HttpServletRequest request) {
+        System.out.println("JwtAuthenticationFilter.getAuthByToken()>>>>>>>>>>>>>>>");
+        Authentication authentication = null;
         //extract token from header
         final String accessToken = request.getHeader("AuthenticationToken");
         if (null != accessToken) {
-            //get and check whether token is valid ( from DB or file wherever you are storing the token)
-            String[] partes = accessToken.split(":");
-
-            if(partes.length != 2) {
-                return authentication;
-            }
             //Populate SecurityContextHolder by fetching relevant information using token
-            authentication = new UsernamePasswordAuthenticationToken(partes[0], partes[1]);
+            authentication = JwtTokenFactory.getAuthentication(accessToken);
         }
 
         return authentication;
@@ -129,6 +118,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
         //response.setHeader("AuthenticationToken" , authResult.getPrincipal() + ":" + authResult.getCredentials());
         // As this authentication is in HTTP header, after success we need to continue the request normally
         // and return the response as if the resource was not secured at all
+
         chain.doFilter(request, response);
     }
 
