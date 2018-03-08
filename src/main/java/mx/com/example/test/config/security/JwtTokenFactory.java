@@ -76,35 +76,43 @@ public class JwtTokenFactory {
         return token;
     }
 
-    static Authentication getAuthentication(String token) {
+    public static Authentication getAuthentication(String token) {
         System.out.println("JwtTokenFactory.getAuthentication()>>>>>");
-        UsernamePasswordAuthenticationToken user = null;
-        //String token = request.getHeader(HEADER_STRING);
-        if (token != null) {
-            // parse the token.
-            Jws<Claims> claims = Jwts.parser()
-                    .setSigningKey(tokenSigningKey)
-                    .parseClaimsJws(token);
+        CustomAuthenticationToken user = null;
+        try {
+            if (token != null) {
+                // parse the token.
+                Jws<Claims> claims = Jwts.parser()
+                        .setSigningKey(tokenSigningKey)
+                        .parseClaimsJws(token);
 
-            String username = claims.getBody().getSubject();
-            List<String> scopes = (List<String>) claims.getBody().get("scopes");
-            Date expiration = claims.getBody().getExpiration();
-            Date issuedAt = claims.getBody().getIssuedAt();
+                String username = claims.getBody().getSubject();
+                List<String> scopes = (List<String>) claims.getBody().get("scopes");
+                Date expiration = claims.getBody().getExpiration();
+                Date issuedAt = claims.getBody().getIssuedAt();
+                String issuer = claims.getBody().getIssuer();
 
-            List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
-            for(String scope: scopes) {
-                roles.add(new GrantedAuthority(){
-                    @Override
-                    public String getAuthority() {
-                        return scope;
-                    }
+                List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
+                for(String scope: scopes) {
+                    roles.add(new GrantedAuthority(){
+                        @Override
+                        public String getAuthority() {
+                            return scope;
+                        }
 
-                });
-            };
+                    });
+                };
 
 
-            user = new UsernamePasswordAuthenticationToken(username, null, roles);
-            System.out.println("subject:" + username + " scopes:" + scopes + " issuedAt:" + issuedAt + " expiration:" + expiration);
+                user = new CustomAuthenticationToken(username, null, roles);
+                user.setExpiration(expiration);
+                user.setIssuer(issuer);
+
+                System.out.println("subject:" + username + " scopes:" + scopes + " issuedAt:" + issuedAt + " expiration:" + expiration);
+            }
+        }
+        catch(Exception ignored) {
+
         }
 
         return user;

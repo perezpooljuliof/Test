@@ -45,13 +45,15 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         System.out.println("JwtAuthenticationFilter.attemptAuthentication()>>>>>");
 
+        //We get the user before validations
         Authentication auth = getAuthByToken(request);
         if(auth == null) {
             auth = getAuthByLogin(request);
-            //return a fully populated Authentication object (including granted authorities) if successful.
-            auth = getAuthenticationManager().authenticate(auth);
         }
 
+        //return a fully populated Authentication object (including granted authorities) if successful.
+        auth = getAuthenticationManager().authenticate(auth);
+        System.out.println("Auth:" + auth);
         return auth;
     }
 
@@ -105,6 +107,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
             authentication = JwtTokenFactory.getAuthentication(accessToken);
         }
 
+        System.out.println("AuthenticationToken:" + authentication);
         return authentication;
     }
 

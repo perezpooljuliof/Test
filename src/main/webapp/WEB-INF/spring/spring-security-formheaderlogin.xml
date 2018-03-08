@@ -14,14 +14,13 @@
     <global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
 
     <!-- Solo se llega al entry-point-ref si no se logra la autenticacion desde el filtro -->
-    <http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint" create-session="stateless">
+    <http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint" create-session="stateless"
+                access-decision-manager-ref="accessDecisionManager">
         <intercept-url pattern="/rest/**" access="hasRole('ROLE_USER')"/>
         <!--Cambio del <form-login> -->
         <custom-filter position="FORM_LOGIN_FILTER" ref="jwtAuthenticationFilter" />
         <csrf disabled="true"/>
     </http>
-
-    <!--<beans:bean id="tokenAuthenticationFilter" class="mx.com.example.test.config.security.TokenAuthenticationFilter" />-->
 
     <!-- This is where spring sends requests which are not authenticated. -->
     <beans:bean id="restAuthenticationEntryPoint" class="mx.com.example.test.config.security.RestAuthenticationEntryPoint">
@@ -35,7 +34,21 @@
         <beans:property name="authenticationSuccessHandler" ref="restAuthenticationSuccessHandler" />
     </beans:bean>
 
+    <beans:bean id="tokenAuthenticationProvider" class="mx.com.example.test.config.security.TokenAuthenticationProvider"/>
+
+    <beans:bean id="accessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased">
+        <beans:constructor-arg>
+            <beans:list>
+                <beans:bean class= "org.springframework.security.web.access.expression.WebExpressionVoter"/>
+                <beans:bean class= "org.springframework.security.access.vote.AuthenticatedVoter"/>
+                <beans:bean class= "org.springframework.security.access.vote.RoleVoter"/>
+                <beans:bean class="mx.com.example.test.config.security.CustomDecisionVoter" />
+            </beans:list>
+        </beans:constructor-arg>
+    </beans:bean>
+
     <authentication-manager alias="authenticationManager">
+        <authentication-provider ref="tokenAuthenticationProvider" />
         <authentication-provider>
             <user-service id="userService">
                 <user name="admin" password="admin" authorities="ROLE_ADMIN" />
