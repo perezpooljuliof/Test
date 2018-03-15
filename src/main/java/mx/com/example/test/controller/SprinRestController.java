@@ -31,17 +31,17 @@ public class SprinRestController {
 	
 	@RequestMapping(value = { "/welcome" }, method = RequestMethod.GET)
 	public String welcomePage(HttpSession session) {
-		logger.info("welcomePage()>>>>>");
-		logger.info("success:" + session.getAttribute("success"));
+		logger.info("SprinRestController.welcomePage()>>>>>");
+		logger.info("SprinRestController.welcomePage().success:" + session.getAttribute("success"));
 		session.setAttribute("success" , "successfully accessed");
 		return "response";
 	}
 	
 	@RequestMapping(value = { "/rest" }, method = RequestMethod.POST)
 	public BeanResponse restPage(@RequestBody BeanRequest bean, HttpSession session) {
-		logger.info("restPage()>>>>>");
-		logger.info("bean:" + bean.getId() + " " + bean.getNombre());
-		logger.info("name:" + session.getAttribute("name"));
+		logger.info("SprinRestController.restPage()>>>>>");
+		logger.info("SprinRestController.restPage().bean:" + bean.getId() + " " + bean.getNombre());
+		logger.info("SprinRestController.restPage().name:" + session.getAttribute("name"));
 		session.setAttribute("name","restPage");
 
 		return new BeanResponse(1, "Julio perez");

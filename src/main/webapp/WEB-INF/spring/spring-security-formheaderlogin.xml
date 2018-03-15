@@ -13,6 +13,8 @@
 
     <global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
 
+    <http pattern="/login.jsp*" security="none"/>
+
     <!-- Solo se llega al entry-point-ref si no se logra la autenticacion desde el filtro -->
     <http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint" create-session="stateless"
                 access-decision-manager-ref="accessDecisionManager">
@@ -30,6 +32,7 @@
     <beans:bean id="restAuthenticationSuccessHandler" class="mx.com.example.test.config.security.RestAuthenticationSuccessHandler" />
 
     <beans:bean id="jwtAuthenticationFilter" class="mx.com.example.test.config.security.JwtAuthenticationFilter">
+        <beans:constructor-arg type="java.lang.String"><beans:value>/rest/**</beans:value></beans:constructor-arg>
         <beans:property name="authenticationManager" ref="authenticationManager" />
         <beans:property name="authenticationSuccessHandler" ref="restAuthenticationSuccessHandler" />
     </beans:bean>
