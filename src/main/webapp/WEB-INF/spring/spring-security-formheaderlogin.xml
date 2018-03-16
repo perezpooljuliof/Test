@@ -13,16 +13,23 @@
 
     <global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
 
-    <http pattern="/login.jsp*" security="none"/>
-
-    <!-- Solo se llega al entry-point-ref si no se logra la autenticacion desde el filtro -->
+    <!-- Stateless RESTful service using Basic authentication -->
     <http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint" create-session="stateless"
-                access-decision-manager-ref="accessDecisionManager">
+                access-decision-manager-ref="accessDecisionManager" pattern="/rest/**">
         <intercept-url pattern="/rest/**" access="hasRole('ROLE_USER')"/>
         <!--Cambio del <form-login> -->
         <custom-filter position="FORM_LOGIN_FILTER" ref="jwtAuthenticationFilter" />
         <csrf disabled="true"/>
     </http>
+
+    <!-- Additional filter chain for normal users, matching all other requests -->
+    <http use-expressions="true" access-decision-manager-ref="accessDecisionManager" create-session="ifRequired">
+        <intercept-url pattern="/page/login" access="isAnonymous()" />
+        <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+
+        <form-login login-page='/page/login'/>
+    </http>
+
 
     <!-- This is where spring sends requests which are not authenticated. -->
     <beans:bean id="restAuthenticationEntryPoint" class="mx.com.example.test.config.security.RestAuthenticationEntryPoint">

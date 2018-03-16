@@ -36,7 +36,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
         }
 
         //return a fully populated Authentication object (including granted authorities) if successful.
-        //auth = getAuthenticationManager().authenticate(auth);
+        auth = getAuthenticationManager().authenticate(auth);
         System.out.println("Auth:" + auth);
         return auth;
     }
