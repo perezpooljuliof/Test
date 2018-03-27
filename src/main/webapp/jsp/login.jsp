@@ -2,7 +2,7 @@
 <head></head>
 <body>
    <h1>Login</h1>
-   <form name='f' action="admin" method='POST'>
+   <form name='f' action="/Test/page/admin" method='POST'>
       <table>
          <tr>
             <td>User:</td>

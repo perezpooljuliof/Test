@@ -23,13 +23,20 @@
     </http>
 
     <!-- Additional filter chain for normal users, matching all other requests -->
-    <http use-expressions="true">
+    <http use-expressions="true" pattern="/**">
         <intercept-url pattern="/page/login" access="isAnonymous()" />
         <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
 
-        <form-login login-page='/page/login' username-parameter="username" password-parameter="password" authentication-failure-url="/Access_Denied"/>
-        <csrf disabled="true"/>
+        <form-login default-target-url="/page/admin" always-use-default-target="true"/>
+        <logout/>
     </http>
+    <!--
+    <http>
+        <intercept-url access="hasRole('USER')" pattern="/**" />
+        <form-login/>
+        <logout/>
+    </http>
+    -->
 
     <!-- This is where spring sends requests which are not authenticated. -->
     <beans:bean id="restAuthenticationEntryPoint" class="mx.com.example.test.config.security.RestAuthenticationEntryPoint">
