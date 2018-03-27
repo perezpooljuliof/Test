@@ -23,13 +23,13 @@
     </http>
 
     <!-- Additional filter chain for normal users, matching all other requests -->
-    <http use-expressions="true" access-decision-manager-ref="accessDecisionManager" create-session="ifRequired">
+    <http use-expressions="true">
         <intercept-url pattern="/page/login" access="isAnonymous()" />
         <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
 
-        <form-login login-page='/page/login'/>
+        <form-login login-page='/page/login' username-parameter="username" password-parameter="password" authentication-failure-url="/Access_Denied"/>
+        <csrf disabled="true"/>
     </http>
-
 
     <!-- This is where spring sends requests which are not authenticated. -->
     <beans:bean id="restAuthenticationEntryPoint" class="mx.com.example.test.config.security.RestAuthenticationEntryPoint">
@@ -62,7 +62,7 @@
         <authentication-provider>
             <user-service id="userService">
                 <user name="admin" password="admin" authorities="ROLE_ADMIN" />
-                <user name="user" password="user" authorities="ROLE_USER, ROLE_APP" />
+                <user name="user" password="user" authorities="ROLE_USER" />
             </user-service>
         </authentication-provider>
     </authentication-manager>

@@ -37,7 +37,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
 
         //return a fully populated Authentication object (including granted authorities) if successful.
         auth = getAuthenticationManager().authenticate(auth);
-        System.out.println("Auth:" + auth);
+        System.out.println("JwtAuthenticationFilter.attemptAuthentication.Auth:\n" + auth);
         return auth;
     }
 
@@ -95,4 +95,17 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
         return authentication;
     }
 
+    @Override
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult)
+            throws IOException, ServletException {
+        super.successfulAuthentication(request, response, chain, authResult);
+        System.out.println("JwtAuthenticationFilter.successfulAuthentication()>>>>>");
+
+        // We set the Authentication token
+        //response.setHeader("AuthenticationToken" , authResult.getPrincipal() + ":" + authResult.getCredentials());
+        // As this authentication is in HTTP header, after success we need to continue the request normally
+        // and return the response as if the resource was not secured at all
+
+        chain.doFilter(request, response);
+    }
 }
