@@ -26,17 +26,18 @@
     <http use-expressions="true" pattern="/**">
         <intercept-url pattern="/page/login" access="isAnonymous()" />
         <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+        <form-login login-page='/page/login'
+                    login-processing-url="/page/appLogin"
+                    username-parameter="app_username"
+                    password-parameter="app_password"
+                    default-target-url="/page/admin"
+                    authentication-failure-url="/page/login?error"
+                    always-use-default-target="true"/>
 
-        <form-login default-target-url="/page/admin" always-use-default-target="true"/>
-        <logout/>
+        <logout logout-success-url="/page/login?logout" />
+
+        <csrf/>
     </http>
-    <!--
-    <http>
-        <intercept-url access="hasRole('USER')" pattern="/**" />
-        <form-login/>
-        <logout/>
-    </http>
-    -->
 
     <!-- This is where spring sends requests which are not authenticated. -->
     <beans:bean id="restAuthenticationEntryPoint" class="mx.com.example.test.config.security.RestAuthenticationEntryPoint">
