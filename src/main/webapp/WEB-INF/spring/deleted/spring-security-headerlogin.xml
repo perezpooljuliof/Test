@@ -16,7 +16,6 @@
     <!-- Solo se llega al entry-point-ref si no se logra la autenticacion desde el filtro -->
     <http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint">
         <intercept-url pattern="/rest/**" access="hasRole('ROLE_USER')"/>
-        <!--Cambio del <http-basic /> -->
         <custom-filter position="BASIC_AUTH_FILTER" ref="restAuthenticationFilter" />
         <csrf disabled="true"/>
     </http>
