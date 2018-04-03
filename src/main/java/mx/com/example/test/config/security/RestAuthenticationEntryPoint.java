@@ -1,6 +1,8 @@
 package mx.com.example.test.config.security;
 
+import org.apache.commons.logging.Log;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 
@@ -14,13 +16,16 @@ import java.io.PrintWriter;
  * This class just returns HTTP code 401 (Unauthorized) when authentication fails, overriding default Spring’s redirecting.
  */
 public class RestAuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
-    final static Logger logger = Logger.getLogger("");
+    /*
+    @Autowired
+    protected Log logger;
+    */
 
     @Override
     public void commence(final HttpServletRequest request,
                          final HttpServletResponse response,
                          final AuthenticationException authException) throws IOException, ServletException {
-        logger.info("RestAuthenticationEntryPoint.commence()>>>>>");
+        //logger.info("RestAuthenticationEntryPoint.commence()>>>>>");
         //Authentication failed, send error response.
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.addHeader("WWW-Authenticate", "Basic realm=" + getRealmName() + "");
