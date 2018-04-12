@@ -19,12 +19,13 @@
 
     <!-- Configuracion, para cargar un archivo de propiedades -->
     <!--
-    <bean  class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="ignoreResourceNotFound" value="true"/>
-        <property name="order" value="1"/>
-        <property name="locations">
+    <bean id="log4jInitialization" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetClass" value="org.springframework.util.Log4jConfigurer"/>
+        <property name="targetMethod" value="initLogging"/>
+        <property name="arguments">
             <list>
-                <value>file:/opt/serviciosWeb/Test/Test.properties</value>
+                <value>classpath:log4j.properties</value>
+                <value>1000</value>
             </list>
         </property>
     </bean>
@@ -35,7 +36,7 @@
         <property name="targetMethod" value="initLogging"/>
         <property name="arguments">
             <list>
-                <value>classpath:log4j.properties</value>
+                <value>${log4j.config.file}</value>
                 <value>1000</value>
             </list>
         </property>
