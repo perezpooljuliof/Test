@@ -5,11 +5,11 @@
              xmlns:context="http://www.springframework.org/schema/context"
              xsi:schemaLocation= "
         http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans-5.0.xsd
+        http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context-5.0.xsd
+        http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/security
-        http://www.springframework.org/schema/security/spring-security-5.0.xsd">
+        http://www.springframework.org/schema/security/spring-security.xsd">
 
     <global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
 
@@ -53,6 +53,8 @@
     </beans:bean>
 
     <beans:bean id="tokenAuthenticationProvider" class="mx.com.example.test.config.security.TokenAuthenticationProvider"/>
+
+    <beans:bean id ="passwordEncoder" class = "org.springframework.security.crypto.password.NoOpPasswordEncoder" factory-method = "getInstance" />
 
     <beans:bean id="accessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased">
         <beans:constructor-arg>

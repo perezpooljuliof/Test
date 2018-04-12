@@ -24,7 +24,7 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
 
         if(!(authentication instanceof CustomAuthenticationToken)) {
             System.out.println("authentication != CustomAuthenticationToken");
-            return customAuthenticationToken;
+            return null;
         }
 
         customAuthenticationToken = (CustomAuthenticationToken) authentication;
