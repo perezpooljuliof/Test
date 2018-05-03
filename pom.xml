@@ -232,6 +232,15 @@
             <artifactId>jjwt</artifactId>
             <version>0.9.0</version>
         </dependency>
+
+        <!-- Proyecto Core -->
+        <dependency>
+            <groupId>mx.com.core</groupId>
+            <artifactId>Core</artifactId>
+            <scope>system</scope>
+            <version>1.0</version>
+            <systemPath>${basedir}/../Core/target/Core-1.0.jar</systemPath>
+        </dependency>
     </dependencies>
   
     <build>
