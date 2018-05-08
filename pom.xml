@@ -21,7 +21,14 @@
         <jstl.version>1.2</jstl.version>
         <hibernate-version>5.1.0.Final</hibernate-version>
     </properties>
-  
+
+    <repositories>
+        <repository>
+
+            <id>Core</id>
+            <url>file://${project.basedir}/libs</url>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
@@ -30,20 +37,17 @@
             <version>3.1.0</version>
             <scope>compile</scope>
         </dependency>
-
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>jsp-api</artifactId>
             <version>2.1</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>taglibs</groupId>
             <artifactId>standard</artifactId>
             <version>1.1.2</version>
         </dependency>
-        
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
@@ -153,6 +157,7 @@
             <artifactId>spring-security-config</artifactId>
             <version>${spring.security.version}</version>
         </dependency>
+
         <!-- Java Web Token -->
         <dependency>
             <groupId>com.auth0</groupId>
@@ -241,6 +246,20 @@
             <version>1.0</version>
             <systemPath>${basedir}/../Core/target/Core-1.0.jar</systemPath>
         </dependency>
+        <!--
+        <dependency>
+            <groupId>mx.com.core</groupId>
+            <artifactId>Core</artifactId>
+            <version>1.0</version>
+        </dependency>
+        -->
+
+        <!-- Apache -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.7</version>
+        </dependency>
     </dependencies>
   
     <build>
@@ -259,18 +278,6 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <skipTests>true</skipTests>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>9.4.6.v20170531</version>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
@@ -281,7 +288,29 @@
                     <update>true</update>
                 </configuration>
             </plugin>
-
+            <!--<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.2</version>
+                <executions>
+                    <execution>
+                        <id>install-external-non-maven1-jar</id>
+                        <phase>clean</phase>
+                        <configuration>
+                            <repositoryLayout>default</repositoryLayout>
+                            <groupId>mx.com.core</groupId>
+                            <artifactId>Core</artifactId>
+                            <version>1.0</version>
+                            <file>${basedir}/../Core/target/Core-1.0.jar</file>
+                            <packaging>jar</packaging>
+                            <generatePom>true</generatePom>
+                        </configuration>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>-->
         </plugins>
     </build>
 </project>
