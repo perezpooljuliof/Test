@@ -1,6 +1,7 @@
 package mx.com.example.test.controller;
 
-import mx.com.example.test.utilidades.EMailManager;
+
+import mx.com.core.utilidades.EMailManager;
 import org.apache.log4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
