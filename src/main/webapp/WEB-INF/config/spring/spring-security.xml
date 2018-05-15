@@ -12,9 +12,12 @@
         http://www.springframework.org/schema/security/spring-security.xsd">
 
     <context:annotation-config/>
-    <context:property-placeholder location="classpath:application.properties" />
+    <!--<context:property-placeholder location="classpath:application.properties" />-->
 
     <global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
+
+    <http pattern="/resources/**" security="none"/>
+    <http pattern="/page/index" security="none"/>
 
     <!-- Stateless RESTful service using Basic authentication -->
     <http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint" create-session="stateless"
