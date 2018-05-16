@@ -32,6 +32,19 @@ public class SprinWebController {
         return "hello2";
     }
 
+    @RequestMapping(value = {"/bazinger"}, method = RequestMethod.GET)
+    public String bazinger(ModelMap model) throws Exception {
+        logger.info("bazinger()>>>>>");
+        return "bazinger";
+    }
+
+
+    @RequestMapping(value = {"/index"}, method = RequestMethod.GET)
+    public String index(ModelMap model) throws Exception {
+        logger.info("index()>>>>>");
+        return "index";
+    }
+
     @RequestMapping(value = {"/sendMail"}, method = RequestMethod.GET)
     public String sendMail(ModelMap model) throws Exception {
         logger.info("sayHello2()>>>>>");

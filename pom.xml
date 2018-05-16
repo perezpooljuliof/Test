@@ -263,13 +263,6 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.0</version>
         </dependency>
-        <!--
-        <dependency>
-            <groupId>biz.paluch.redis</groupId>
-            <artifactId>lettuce</artifactId>
-            <version>3.3.1.Final</version>
-        </dependency>
-        -->
 
         <!-- Proyecto Core -->
         <dependency>
@@ -314,29 +307,6 @@
                     <update>true</update>
                 </configuration>
             </plugin>
-            <!--<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-install-plugin</artifactId>
-                <version>2.5.2</version>
-                <executions>
-                    <execution>
-                        <id>install-external-non-maven1-jar</id>
-                        <phase>clean</phase>
-                        <configuration>
-                            <repositoryLayout>default</repositoryLayout>
-                            <groupId>mx.com.core</groupId>
-                            <artifactId>Core</artifactId>
-                            <version>1.0</version>
-                            <file>${basedir}/../Core/target/Core-1.0.jar</file>
-                            <packaging>jar</packaging>
-                            <generatePom>true</generatePom>
-                        </configuration>
-                        <goals>
-                            <goal>install-file</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>-->
         </plugins>
     </build>
 </project>

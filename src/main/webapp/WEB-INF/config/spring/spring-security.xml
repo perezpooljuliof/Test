@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xsi:schemaLocation= "
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <context:annotation-config/>
+    <!--<context:property-placeholder location="classpath:application.properties" />-->
+
+    <global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
+
+    <http pattern="/resources/**" security="none"/>
+    <http pattern="/page/index" security="none"/>
+
+    <!-- Stateless RESTful service using Basic authentication -->
+    <http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint" create-session="stateless"
+                access-decision-manager-ref="accessDecisionManager" pattern="/rest/**">
+        <intercept-url pattern="/rest/**" access="hasRole('ROLE_USER')"/>
+        <!--Cambio del <form-login> -->
+        <custom-filter position="FORM_LOGIN_FILTER" ref="jwtAuthenticationFilter" />
+        <csrf disabled="true"/>
+    </http>
+
+    <!-- Additional filter chain for normal users, matching all other requests -->
+    <http use-expressions="true" pattern="/**">
+        <intercept-url pattern="/page/login" access="isAnonymous()" />
+        <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+        <form-login login-page='/page/login'
+                    login-processing-url="/page/appLogin"
+                    username-parameter="app_username"
+                    password-parameter="app_password"
+                    default-target-url="/page/admin"
+                    authentication-failure-url="/page/login?error"
+                    always-use-default-target="true"/>
+
+        <logout logout-success-url="/page/login?logout" />
+
+        <csrf />
+    </http>
+
+    <!-- This is where spring sends requests which are not authenticated. -->
+    <beans:bean id="restAuthenticationEntryPoint" class="mx.com.example.test.config.security.RestAuthenticationEntryPoint">
+        <beans:property name="realmName" value="cardinalRealmName" />
+    </beans:bean>
+
+    <beans:bean id="restAuthenticationSuccessHandler" class="mx.com.example.test.config.security.RestAuthenticationSuccessHandler" />
+
+    <beans:bean id="jwtAuthenticationFilter" class="mx.com.example.test.config.security.JwtAuthenticationFilter">
+        <beans:constructor-arg type="java.lang.String"><beans:value>/rest/**</beans:value></beans:constructor-arg>
+        <beans:property name="authenticationManager" ref="authenticationManager" />
+        <beans:property name="authenticationSuccessHandler" ref="restAuthenticationSuccessHandler" />
+    </beans:bean>
+
+    <beans:bean id="tokenAuthenticationProvider" class="mx.com.example.test.config.security.TokenAuthenticationProvider"/>
+
+    <beans:bean id ="passwordEncoder" class = "org.springframework.security.crypto.password.NoOpPasswordEncoder" factory-method = "getInstance" />
+
+    <beans:bean id="accessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased">
+        <beans:constructor-arg>
+            <beans:list>
+                <beans:bean class= "org.springframework.security.web.access.expression.WebExpressionVoter"/>
+                <beans:bean class= "org.springframework.security.access.vote.AuthenticatedVoter"/>
+                <beans:bean class= "org.springframework.security.access.vote.RoleVoter"/>
+                <beans:bean class="mx.com.example.test.config.security.CustomDecisionVoter" />
+            </beans:list>
+        </beans:constructor-arg>
+    </beans:bean>
+
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider ref="tokenAuthenticationProvider" />
+        <authentication-provider>
+            <user-service id="userService">
+                <user name="admin" password="admin" authorities="ROLE_ADMIN" />
+                <user name="user" password="user" authorities="ROLE_USER" />
+            </user-service>
+        </authentication-provider>
+    </authentication-manager>
+
+</beans:beans>
