@@ -32,6 +32,18 @@
         <link rel="stylesheet" href="/Test/resources/theme/bazinger/assets/css/responsive.css" />
 
         <script src="/Test/resources/theme/bazinger/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+
+        <script src="/Test/resources/theme/bazinger/assets/js/vendor/jquery-1.11.2.min.js"></script>
+        <script src="/Test/resources/theme/bazinger/assets/js/vendor/bootstrap.min.js"></script>
+
+
+        <script src="http://maps.google.com/maps/api/js"></script>
+        <script src="/Test/resources/theme/bazinger/assets/js/gmaps.min.js"></script>
+
+        <script src="/Test/resources/theme/bazinger/assets/js/jquery.magnific-popup.js"></script>
+
+        <script src="/Test/resources/theme/bazinger/assets/js/plugins.js"></script>
+        <script src="/Test/resources/theme/bazinger/assets/js/main.js"></script>
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -497,17 +509,7 @@
             </div>
         </footer>
 
-
-        <script src="/Test/resources/theme/bazinger/assets/js/vendor/jquery-1.11.2.min.js"></script>
-        <script src="/Test/resources/theme/bazinger/assets/js/vendor/bootstrap.min.js"></script>
-
-
-        <script src="http://maps.google.com/maps/api/js"></script>
-        <script src="/Test/resources/theme/bazinger/assets/js/gmaps.min.js"></script>
-
-        <script src="/Test/resources/theme/bazinger/assets/js/jquery.magnific-popup.js"></script>
-
-        <script src="/Test/resources/theme/bazinger/assets/js/plugins.js"></script>
-        <script src="/Test/resources/theme/bazinger/assets/js/main.js"></script>
+        <%@include file="modal.html" %>
+        <%@include file="test/ModalTest.html" %>
     </body>
 </html>

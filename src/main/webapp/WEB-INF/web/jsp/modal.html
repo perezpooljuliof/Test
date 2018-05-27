@@ -1,0 +1,44 @@
+<!-- Modal -->
+<div class="modal fade" id="bModal" tabindex="-1" role="dialog" aria-labelledby="bModalTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bModalTitle">New message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="bModalBody">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    function showMessage(titulo, mensaje, onShowMethod, onHideMethod) {
+        $("#bModalTitle").text(titulo);
+        $("#bModalBody").text(mensaje);
+        $("#bModal").modal('show');
+
+        $('#bModal').on('shown.bs.modal', function (e) {
+            if(onShowMethod != null) {
+                onShowMethod();
+            }
+            //removemos el callback para evitar duplicidad
+            $('#bModal').off('shown');
+        });
+
+        $('#bModal').on('hide.bs.modal', function (e) {
+            if(onHideMethod != null) {
+                onHideMethod();
+            }
+            //removemos el callback para evitar duplicidad
+            $('#bModal').off('hide');
+        });
+    }
+</script>

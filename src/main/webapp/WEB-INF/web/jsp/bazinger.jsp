@@ -498,6 +498,9 @@
         </footer>
 
 
+
+
+
         <script src="${resourcesFolder}theme/bazinger/assets/js/vendor/jquery-1.11.2.min.js"></script>
         <script src="${resourcesFolder}theme/bazinger/assets/js/vendor/bootstrap.min.js"></script>
 

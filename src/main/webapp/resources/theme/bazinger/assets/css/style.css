@@ -41,7 +41,7 @@ a span {
     transition: 0.2s ease-in-out;
 }
 /*==========================================
-PRE LOADER 
+PRE LOADER
 ==========================================*/
 
 .preloader {
@@ -301,7 +301,7 @@ Separator
 Button
 */
 .btn-primary{
-	
+
 	padding:20px 45px;
 	background:#4bcaff;
 	text-transform:uppercase;
@@ -310,7 +310,7 @@ Button
 	color:#fff;
 	border:0;
 	box-shadow: inset 0 -5px 1px rgba(0,0,0,0.3);
-				
+
 }
 
 .btn-primary.active.focus,
@@ -330,6 +330,24 @@ Button
     background-color: #f56363;
     border-color: #f56363;
 }
+
+.button {
+	padding:10px;
+	background:#4bcaff;
+	text-transform:uppercase;
+	font-size:10px;
+	font-weight:600;
+	color:#fff;
+	border:0;
+	box-shadow: inset 0 -5px 1px rgba(0,0,0,0.3);
+}
+
+.button:active, .button:hover  {
+    background-color: #286090;
+    border-color: #204d74;
+}
+
+
 
 .btn-default{
 	background:transparent;
@@ -502,7 +520,7 @@ textarea::-ms-input-placeholder
     background-color: transparent;
     border-top: 3px solid #4bcaff;
 }
-    
+
 
 /*For Home Section*/
 
@@ -530,7 +548,7 @@ textarea::-ms-input-placeholder
 }
 .home-content p{
 	margin:30px 0;
-	
+
 }
 .available{
 	margin-top:50px;
@@ -591,7 +609,7 @@ textarea::-ms-input-placeholder
 	background:#414042;
 	color:fff;
 }
-	
+
 .features-content:hover h5{
 	color: #4bcaff;
 }
@@ -628,10 +646,10 @@ textarea::-ms-input-placeholder
 	width: 100%;
     height: 79%;
     top: -90%;
-	transition:.5s; 
+	transition:.5s;
 }
 .gallery:hover .img-overlay{
-	top:0;	
+	top:0;
 }
 
 .gallery-icon a{
@@ -690,7 +708,7 @@ textarea::-ms-input-placeholder
 }
 .video-content p{
 	margin:30px 0;
-	
+
 }
 
 /* For Price Section */
@@ -786,7 +804,7 @@ textarea::-ms-input-placeholder
    background: url(../images/testimonial.png) no-repeat right top;
    width:100%;
    height:175px;
-  
+
 }
 .testimonial-photo img {
     height: 120px;
@@ -804,7 +822,7 @@ textarea::-ms-input-placeholder
 
 .item {
 	color:#4bcaff;
-	
+
 }
 .item p{
 	text-align:left;
@@ -854,7 +872,7 @@ textarea::-ms-input-placeholder
 
 /* For Contact Section*/
 #map{
-	
+
 	height:650px;
 	width:100%;
 	position:relative;
@@ -878,7 +896,7 @@ textarea::-ms-input-placeholder
 	-webkit-box-shadow:1px 1px 1px 0 rgba(55,50,40, .10);
 	-moz-box-shadow:1px 1px 1px 0 rgba(55,50,40, .10);
 	-ms-box-shadow:1px 1px 1px 0 rgba(55,50,40, .10);
-	
+
 }
 .contact-form-area form h3{
 	font-size:36px;
@@ -896,7 +914,7 @@ textarea::-ms-input-placeholder
 }
 .contact-form-area form .contact-btn:hover{
 	background#fff;
-	
+
 }
 
 /* For Footer Section*/
@@ -928,4 +946,4 @@ textarea::-ms-input-placeholder
     background: #008ac4;
     color: #fff;
     transform:scale(1.1);
-}	
+}git

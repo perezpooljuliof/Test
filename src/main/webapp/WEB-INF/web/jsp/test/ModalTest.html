@@ -1,0 +1,22 @@
+<!-- Button trigger modal -->
+<button type="button" class="button" id="btnModal">
+    Launch demo modal
+</button>
+
+<script>
+    $(document).ready(function() {
+        function ocultado() {
+            console.log("ocultado");
+            suma();
+        }
+
+        function suma() {
+            console.log("suma");
+        }
+
+        $("#btnModal").click(function() {
+            console.log("btnModal.click()>>>>>>>>>>>>>>>>>");
+            showMessage("titulo", "Hola", ocultado, ocultado);
+        });
+    });
+</script>
