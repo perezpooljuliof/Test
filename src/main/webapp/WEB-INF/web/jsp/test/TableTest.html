@@ -1,0 +1,135 @@
+<script type="text/javascript">
+    $(document ).ready(function() {
+        var selecteRow = {};
+
+        console.log("ready()>>>>>>>>");
+        $('#myTable').on('click', '.clickable-row', function(event) {
+            console.log("clickeablerow.click()>>>>>");
+            if($(this).hasClass('active')){
+                $(this).removeClass('active');
+                selecteRow = null;
+            } else {
+                $(this).addClass('active').siblings().removeClass('active');
+                selectedRow = $(this);
+            }
+
+            console.log(selectedRow);
+            console.log("ID" + selectedRow.prop('id'));
+        });
+    });
+
+
+    /**
+     * Funcion que devuelve las filas de una tabla.
+     */
+    function getTableRows(table) {
+        var filas = table.getElementsByTagName("tr");
+        return filas;
+    }
+
+
+    function getRowColumns(row) {
+        var columnas = row.getElementsByTagName("td");
+        return columnas
+    }
+
+    function getColumnValue(column) {
+        return column.innerHTML;
+    }
+
+    function addRow(table) {
+        // Create an empty <tr> element and add it to the 1st position of the table:
+        var cantidadFilas = getRowsCount(table);
+        var row = table.insertRow(cantidadFilas);
+
+        // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+
+        // Add some text to the new cells:
+        cell1.innerHTML = cantidadFilas;
+        cell2.innerHTML = "NEW CELL";
+    }
+
+    function deleteRow(table, index) {
+        table.deleteRow(index);
+    }
+
+    function getRowsCount(table) {
+        var rows = getTableRows(table)
+        return (rows!=null)?rows.length:0;
+    }
+
+    function getSelectedRow(idTabla) {
+        console.log("getTableRowsTest(" + idTabla + ")");
+        var tabla = document.getElementById(idTabla);
+        var filas = getTableRows(tabla);
+        var i = 0;
+        for (; i < filas.length; i++) {
+            console.log(filas[i]);
+
+        }
+
+        addRow(tabla);
+    }
+</script>
+<table id="myTable" class="table table-fixed table-hover">
+    <thead>
+    <tr>
+        <th class="col-xs-1">#</th>
+        <th class="col-xs-5">President</th>
+        <th class="col-xs-3">Terms</th>
+        <th class="col-xs-3">Tenure</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr class="clickable-row" id="fila_1">
+            <td class="col-xs-1">1</td>
+            <td class="col-xs-5">George Washington</td>
+            <td class="col-xs-3">two</td>
+            <td class="col-xs-3">1789-1797</td>
+        </tr>
+        <tr class="clickable-row" id="fila_2">
+            <td class="col-xs-1">2</td>
+            <td class="col-xs-5">John Adams</td>
+            <td class="col-xs-3">one</td>
+            <td class="col-xs-3">1797-1801</td>
+        </tr>
+        <tr class="clickable-row" id="fila_3">
+            <td class="col-xs-1">1</td>
+            <td class="col-xs-5">George Washington</td>
+            <td class="col-xs-3">two</td>
+            <td class="col-xs-3">1789-1797</td>
+        </tr>
+        <tr class="clickable-row" id="fila_4">
+            <td class="col-xs-1">2</td>
+            <td class="col-xs-5">John Adams</td>
+            <td class="col-xs-3">one</td>
+            <td class="col-xs-3">1797-1801</td>
+        </tr>
+        <tr class="clickable-row">
+            <td class="col-xs-1">1</td>
+            <td class="col-xs-5">George Washington</td>
+            <td class="col-xs-3">two</td>
+            <td class="col-xs-3">1789-1797</td>
+        </tr>
+        <tr>
+            <td class="col-xs-1">2</td>
+            <td class="col-xs-5">John Adams</td>
+            <td class="col-xs-3">one</td>
+            <td class="col-xs-3">1797-1801</td>
+        </tr>
+        <tr>
+            <td class="col-xs-1">1</td>
+            <td class="col-xs-5">George Washington</td>
+            <td class="col-xs-3">two</td>
+            <td class="col-xs-3">1789-1797</td>
+        </tr>
+        <tr>
+            <td class="col-xs-1">2</td>
+            <td class="col-xs-5">John Adams</td>
+            <td class="col-xs-3">one</td>
+            <td class="col-xs-3">1797-1801</td>
+        </tr>
+    </tbody>
+</table>

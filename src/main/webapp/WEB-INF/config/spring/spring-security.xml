@@ -16,6 +16,7 @@
 
     <global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
 
+    <!-- Excepciones de Seguridad -->
     <http pattern="/resources/**" security="none"/>
     <http pattern="/page/index" security="none"/>
 

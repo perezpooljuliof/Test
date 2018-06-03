@@ -511,5 +511,6 @@
 
         <%@include file="modal.html" %>
         <%@include file="test/ModalTest.html" %>
+        <%@include file="test/TableTest.html" %>
     </body>
 </html>
