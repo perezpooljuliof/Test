@@ -44,6 +44,8 @@
 
         <script src="/Test/resources/theme/bazinger/assets/js/plugins.js"></script>
         <script src="/Test/resources/theme/bazinger/assets/js/main.js"></script>
+
+        <script src="/Test/resources/theme/bazinger/assets/js/bootstable.js"></script>
     </head>
     <body>
         <!--[if lt IE 8]>

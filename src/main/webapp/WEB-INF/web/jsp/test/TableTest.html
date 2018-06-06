@@ -16,6 +16,15 @@
             console.log(selectedRow);
             console.log("ID" + selectedRow.prop('id'));
         });
+
+        //apply
+        $("#myTable").SetEditable({
+                $addButton: $('#add')
+            });
+
+        $("#table-list").SetEditable({
+                $addButton: $('#add')
+            });
     });
 
 
@@ -73,63 +82,92 @@
         addRow(tabla);
     }
 </script>
-<table id="myTable" class="table table-fixed table-hover">
+<div class="table-content">
+<table id="myTable" class="table table-hover table-fixed table-responsive">
     <thead>
     <tr>
-        <th class="col-xs-1">#</th>
-        <th class="col-xs-5">President</th>
-        <th class="col-xs-3">Terms</th>
-        <th class="col-xs-3">Tenure</th>
+        <th>#</th>
+        <th>President</th>
+        <th>Terms</th>
+        <th>Tenure</th>
     </tr>
     </thead>
     <tbody>
         <tr class="clickable-row" id="fila_1">
-            <td class="col-xs-1">1</td>
-            <td class="col-xs-5">George Washington</td>
-            <td class="col-xs-3">two</td>
-            <td class="col-xs-3">1789-1797</td>
+            <td>1</td>
+            <td>George Washington</td>
+            <td>two</td>
+            <td>1789-1797</td>
         </tr>
         <tr class="clickable-row" id="fila_2">
-            <td class="col-xs-1">2</td>
-            <td class="col-xs-5">John Adams</td>
-            <td class="col-xs-3">one</td>
-            <td class="col-xs-3">1797-1801</td>
+            <td>2</td>
+            <td>John Adams</td>
+            <td>one</td>
+            <td>1797-1801</td>
         </tr>
         <tr class="clickable-row" id="fila_3">
-            <td class="col-xs-1">1</td>
-            <td class="col-xs-5">George Washington</td>
-            <td class="col-xs-3">two</td>
-            <td class="col-xs-3">1789-1797</td>
+            <td>1</td>
+            <td>George Washington</td>
+            <td>two</td>
+            <td>1789-1797</td>
         </tr>
         <tr class="clickable-row" id="fila_4">
-            <td class="col-xs-1">2</td>
-            <td class="col-xs-5">John Adams</td>
-            <td class="col-xs-3">one</td>
-            <td class="col-xs-3">1797-1801</td>
+            <td>2</td>
+            <td>John Adams</td>
+            <td>one</td>
+            <td>1797-1801</td>
         </tr>
         <tr class="clickable-row">
-            <td class="col-xs-1">1</td>
-            <td class="col-xs-5">George Washington</td>
-            <td class="col-xs-3">two</td>
-            <td class="col-xs-3">1789-1797</td>
-        </tr>
-        <tr>
-            <td class="col-xs-1">2</td>
-            <td class="col-xs-5">John Adams</td>
-            <td class="col-xs-3">one</td>
-            <td class="col-xs-3">1797-1801</td>
-        </tr>
-        <tr>
-            <td class="col-xs-1">1</td>
-            <td class="col-xs-5">George Washington</td>
-            <td class="col-xs-3">two</td>
-            <td class="col-xs-3">1789-1797</td>
-        </tr>
-        <tr>
-            <td class="col-xs-1">2</td>
-            <td class="col-xs-5">John Adams</td>
-            <td class="col-xs-3">one</td>
-            <td class="col-xs-3">1797-1801</td>
+            <td>1</td>
+            <td>George Washington</td>
+            <td>two</td>
+            <td>1789-1797</td>
         </tr>
     </tbody>
 </table>
+</div>
+
+<div class="table-content">
+    <table class="table table-borded table-responsive table-striped " id="table-list">
+        <thead class="table-dark">
+        <tr>
+            <td>Name</td>
+            <td>Gental</td>
+            <td>eMail</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>James</td>
+            <td>Male</td>
+            <td>jhsdfgh@hotmail.com</td>
+        </tr>
+        <tr>
+            <td>Sams</td>
+            <td>Male</td>
+            <td>hhfdfg@hotmail.com</td>
+        </tr>
+        <tr>
+            <td>Mary</td>
+            <td>Female</td>
+            <td>vccch@gmail.com</td>
+        </tr>
+        <tr>
+            <td>Ashly</td>
+            <td>Female</td>
+            <td>asss@gmail.com</td>
+        </tr>
+        <tr>
+            <td>Eden</td>
+            <td>Male</td>
+            <td>edd@hotmail.com</td>
+        </tr>
+        <tr>
+            <td>Daisy</td>
+            <td>Female</td>
+            <td>hhdf@gmail.com</td>
+        </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-info" id="add"><span class="glyphicon glyphicon-plus-sign"></span>Add New Members</button>
+</div>
