@@ -26,10 +26,10 @@ public class SprinWebController {
 
     final static Logger logger = Logger.getLogger("");
 
-    @RequestMapping(value = {"/hello2"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/hello"}, method = RequestMethod.GET)
     public String sayHello2(ModelMap model) throws Exception {
-        logger.info("sayHello2()>>>>>");
-        return "hello2";
+        logger.info("sayHello()>>>>>");
+        return "hello";
     }
 
     @RequestMapping(value = {"/bazinger"}, method = RequestMethod.GET)
@@ -43,6 +43,11 @@ public class SprinWebController {
     public String index(ModelMap model) throws Exception {
         logger.info("index()>>>>>");
         return "index";
+    }
+
+    @RequestMapping(value = {"/inventario"}, method = RequestMethod.GET)
+    public String inventario(ModelMap model) throws Exception {
+        return "inventario";
     }
 
     @RequestMapping(value = {"/sendMail"}, method = RequestMethod.GET)

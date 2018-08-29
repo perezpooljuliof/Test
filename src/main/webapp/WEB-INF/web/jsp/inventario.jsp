@@ -61,37 +61,29 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="active"><a href="#home">Home</a></li>
-                        <li><a href="inventario">Inventario</a></li>
+                        <li><a href="#home">Home</a></li>
+                        <li class="active"><a href="#inventario">Inventario</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
 
-        <!--Home page style-->
-        <header id="home" class="home">
-            <div class="container">
+        <!-- Sections -->
+        <section id="inventario" class="sections lightbg">
+            <div class="container text-center">
+                <div class="heading-content">
+                    <h3>Testimonials</h3>
+                </div>
+
+                <!-- Example row of columns -->
                 <div class="row">
-                    <div class="col-md-6 col-md-offset-6 col-sm-12 col-xs-12">
-                        <div class="home-content sections">
-                            <h1>Simple, Beautiful <span>and Amazing</span></h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget nunc vitae tellus luctus ullamcorper. Nam porttitor ullamcorper felis at convallis. Aenean ornare vestibulum nisi fringilla lacinia. Nullam pulvinar sollicitudin velit id laoreet. Quisque non rhoncus sem.</p>
-                            <a target="_blank" href="#"><button class="btn btn-default btn-lg">Download</button></a>
-                            <a target="_blank" href="#"><button class="btn btn-primary btn-lg">Learn More</button></a>
-                            <div class="available">
-                                <p>
-                                    Available on :
-                                    <a href="#"><i class="fa fa-apple"></i></a>
-                                    <a href="#"><i class="fa fa-android"></i></a>
-                                </p>
-                            </div>
-                        </div>
+                    <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+                        Inventario
                     </div>
                 </div>
-            </div>
-        </header>
+            </div> <!-- /container -->
+        </section>
 
         <!--Footer-->
         <footer id="footer" class="footer colorsbg">

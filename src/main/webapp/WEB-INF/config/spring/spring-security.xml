@@ -19,6 +19,7 @@
     <!-- Excepciones de Seguridad -->
     <http pattern="/resources/**" security="none"/>
     <http pattern="/page/index" security="none"/>
+    <http pattern="/page/inventario" security="none"/>
 
     <!-- Stateless RESTful service using Basic authentication -->
     <http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint" create-session="stateless"
