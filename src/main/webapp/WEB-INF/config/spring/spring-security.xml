@@ -17,9 +17,12 @@
     <global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
 
     <!-- Excepciones de Seguridad -->
-    <http pattern="/resources/**" security="none"/>
-    <http pattern="/page/index" security="none"/>
-    <http pattern="/page/inventario" security="none"/>
+    <!--
+    <http use-expressions="true" pattern="/resources/**" security="permitAll"/>
+    <http use-expressions="true" pattern="/js/**" security="permitAll"/>
+    <http use-expressions="true" pattern="/page/index" security="permitAll"/>
+    <http use-expressions="true" pattern="/page/inventario" security="permitAll"/>
+    -->
 
     <!-- Stateless RESTful service using Basic authentication -->
     <http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint" create-session="stateless"
@@ -32,8 +35,16 @@
 
     <!-- Additional filter chain for normal users, matching all other requests -->
     <http use-expressions="true" pattern="/**">
-        <intercept-url pattern="/page/login" access="isAnonymous()" />
+
+        <intercept-url pattern="/page/login" access="permitAll" />
+
+        <intercept-url pattern="/resources/**" access="permitAll" />
+        <intercept-url pattern="/js/**" access="permitAll" />
+        <intercept-url pattern="/page/index" access="permitAll" />
+        <intercept-url pattern="/page/inventario" access="permitAll" />
+
         <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
+
         <form-login login-page='/page/login'
                     login-processing-url="/page/appLogin"
                     username-parameter="app_username"

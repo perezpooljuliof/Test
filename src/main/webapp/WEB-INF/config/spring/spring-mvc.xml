@@ -17,6 +17,9 @@
 
     <context:component-scan base-package = "mx.com.example.test.controller" />
 
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+    <mvc:resources mapping="/js/**" location="/WEB-INF/web/js/" />
+
     <mvc:annotation-driven>
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter">
@@ -29,9 +32,6 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
-
-
-    <mvc:resources mapping="/resources/**" location="/resources/" />
 
     <bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name = "prefix" value = "/WEB-INF/web/jsp/" />

@@ -39,7 +39,7 @@ jQuery(document).ready(function ($) {
     /*---------------------------------------------*
      * Google Map Area
      ---------------------------------------------*/
-
+    /*
     var map = new GMaps({
         el: '#map',
         lat: 23.535726,
@@ -57,6 +57,7 @@ jQuery(document).ready(function ($) {
         }
 
     });
+    */
 	
 	/*---------------------------------------------*
      * Gallery Pop Up Animation
