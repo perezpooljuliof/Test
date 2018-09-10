@@ -4,7 +4,7 @@ CREATE TABLE PRODUCTO (
     Costo DECIMAL(10,2) NOT NULL,
     Precio DECIMAL(10,2) NOT NULL,
     esGravable CHAR(1) NOT NULL,
-    IdTipoProducto INT NOT NULL,
+    TipoVentaProd CHAR(1) NOT NULL,             -- U = Unidad/Pza, G = Granel
     esIEPS CHAR(1) NOT NULL,
     esISH CHAR(1) NOT NULL,
 
