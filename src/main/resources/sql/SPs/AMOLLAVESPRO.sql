@@ -33,6 +33,6 @@ BEGIN
 
         SET Par_ID := Var_ID;
         SET Par_NumResultado := 0;
-        SET Par_Resultado := 'ID Generada correctamente';
+        SET Par_Resultado := 'ID Generado correctamente';
     END BODY;
 END$$

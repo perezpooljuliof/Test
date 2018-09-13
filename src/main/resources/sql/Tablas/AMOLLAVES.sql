@@ -6,7 +6,8 @@ DELIMITER $$
 
 CREATE TABLE AMOLLAVES (
     Tabla               VARCHAR(30)         NOT NULL,
-    ID                  BIGINT(20)          NOT NULL
+    ID                  BIGINT(20)          NOT NULL,
+    CONSTRAINT UNIQUE (Tabla)
 )$$
 
 ALTER TABLE AMOLLAVES ADD INDEX (Tabla)$$

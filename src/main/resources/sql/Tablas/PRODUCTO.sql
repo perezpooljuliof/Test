@@ -9,10 +9,12 @@ CREATE TABLE PRODUCTO (
     Producto        VARCHAR(100)    NOT NULL,
     Costo           DECIMAL(10,2)   NOT NULL,
     Precio          DECIMAL(10,2)   NOT NULL,
-    esGravable      CHAR(1)         NOT NULL,
     TipoVentaProd   CHAR(1)         NOT NULL,       -- U = Unidad/Pza, G = Granel
-    esIEPS          CHAR(1)         NOT NULL,
-    esISH           CHAR(1)         NOT NULL,
+    EsGravable      CHAR(1)         NOT NULL,
+    EsIEPS          CHAR(1)         NOT NULL,
+    EsISH           CHAR(1)         NOT NULL,
+    Estatus         CHAR(1)         NOT NULL,       -- Estatus (A = Activo, B = Baja)
+    IDDepartamento  INT             NOT NULL,       -- ID del Departamento (Une con Tabla Departamento)
 
     UUID            VARCHAR(50)     NOT NULL,       -- Identificador de la transaccion
     FechaAct        DATETIME        NOT NULL,       -- Fecha y hora de la ultima actualizacion
@@ -20,3 +22,5 @@ CREATE TABLE PRODUCTO (
 
     PRIMARY KEY(IdProducto)
 )$$
+
+ALTER TABLE PRODUCTO ADD INDEX (IDDepartamento)$$

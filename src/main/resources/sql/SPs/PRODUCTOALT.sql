@@ -10,32 +10,114 @@ CREATE PROCEDURE PRODUCTOALT (
     Par_Producto                VARCHAR(100),       -- Nombre del Producto
     Par_Costo                   DECIMAL(10,2),      -- Costo
     Par_Precio                  DECIMAL(10,2),      -- Precio
-    Par_esGravable              CHAR(1),            -- Es Gravable
-    Par_TipoVentaProd           CHAR(1),            -- Tipo de Venta del producto
-    Par_esIEPS                  CHAR(1),            -- Es IEPS
-    Par_esISH                   CHAR(1),            -- Es ISH
+    Par_EsGravable              CHAR(1),            -- Es Gravable
+    Par_TipoVentaProd           CHAR(1),            -- Tipo de Venta del producto (U = Unidad/Pza, G = Granel)
+    Par_EsIEPS                  CHAR(1),            -- Es IEPS
+    Par_EsISH                   CHAR(1),            -- Es ISH
+    Par_Estatus                 CHAR(1),            -- Estatus del producto (Alta por defecto)
+    Par_IDDepartamento          INT,                -- ID del Departamento
 
     Par_UUID                    VARCHAR(50),        -- Identificador de la transaccion
     Par_IDUsuario               INT,                -- Ultimo usuario en realizar la actualizacion
 
+    Par_MostrarResultado        CHAR(1),            -- Opcion para habilitar salida de resultado en pantalla
     INOUT Par_NumResultado      INT,                -- Numero de resultado
-    INOUT Par_Resultado         VARCHAR(200),       -- Descripcion del resultado
+    INOUT Par_Resultado         VARCHAR(200)        -- Descripcion del resultado
 )
 BEGIN
     -- Declaracion de variables
+    DECLARE Var_IDProducto      INT;
+    DECLARE Var_IDProductoIgual INT;
 
     -- Asignacion de valores por defecto
     SET Par_Producto 		    := IFNULL(Par_Producto, '');
     SET Par_Precio 				:= IFNULL(Par_Precio, 0.0);
     SET Par_Costo 				:= IFNULL(Par_Costo, 0.0);
-    SET Par_esGravable          := IFNULL(Par_esGravable, '');
     SET Par_TipoVentaProd       := IFNULL(Par_TipoVentaProd, '');
-    SET Par_esIEPS              := IFNULL(Par_esIEPS, '');
-    SET Par_esISH               := IFNULL(Par_esISH, '');
+    SET Par_EsGravable          := IFNULL(Par_EsGravable, 'N');
+    SET Par_EsIEPS              := IFNULL(Par_EsIEPS, 'N');
+    SET Par_EsISH               := IFNULL(Par_EsISH, 'N');
+    SET Par_IDDepartamento      := IFNULL(Par_IDDepartamento, 0);
+
+    SET Par_UUID                := IFNULL(Par_UUID, '');
+    SET Par_IDUsuario 		    := IFNULL(Par_IDUsuario, 0);
 
     BODY: BEGIN
+        IF(Par_Producto = '') THEN
+            SET Par_Resultado := 'Especifique el nombre del producto';
+            SET Par_NumResultado := 1;
+            LEAVE BODY;
+        END IF;
 
+        IF(Par_Costo <= 0.0) THEN
+            SET Par_Resultado := 'Especifique el costo del producto';
+            SET Par_NumResultado := 1;
+            LEAVE BODY;
+        END IF;
 
+        IF(Par_Precio <= 0.0) THEN
+            SET Par_Resultado := 'Especifique el precio del producto';
+            SET Par_NumResultado := 1;
+            LEAVE BODY;
+        END IF;
 
+        IF(Par_TipoVentaProd NOT IN ('U', 'G')) THEN
+            SET Par_Resultado := 'Especifique el tipo de venta del producto (U = Unidad, G = Granel)';
+            SET Par_NumResultado := 1;
+            LEAVE BODY;
+        END IF;
+
+        IF(Par_EsGravable NOT IN ('S', 'N')) THEN
+            SET Par_Resultado := 'Especifique si el producto es Gravable (S = SI, N = NO)';
+            SET Par_NumResultado := 1;
+            LEAVE BODY;
+        END IF;
+
+        IF(Par_EsIEPS NOT IN ('S', 'N')) THEN
+            SET Par_Resultado := 'Especifique si el producto genera IEPS (S = SI, N = NO)';
+            SET Par_NumResultado := 1;
+            LEAVE BODY;
+        END IF;
+
+        IF(Par_EsISH NOT IN ('S', 'N')) THEN
+            SET Par_Resultado := 'Especifique si el producto genera ISH (S = SI, N = NO)';
+            SET Par_NumResultado := 1;
+            LEAVE BODY;
+        END IF;
+
+        SELECT IDProducto INTO Var_IDProductoIgual
+            FROM PRODUCTO
+            WHERE Producto = Par_Producto;
+
+        IF(Var_IDProductoIgual IS NOT NULL) THEN
+            SET Par_Resultado := 'Existe un producto con el mismo nombre, especifique un nombre diferente.';
+            SET Par_NumResultado := 1;
+            LEAVE BODY;
+        END IF;
+
+        CALL MAESTROLLAVESPRO ('PRODUCTO', Var_IDProducto, Par_NumResultado, Par_Resultado);
+
+        IF(Par_NumResultado > 0) THEN
+            LEAVE BODY;
+        END IF;
+
+        INSERT INTO PRODUCTO(
+                IDProducto,         Producto,           Costo,              Precio,         TipoVentaProd,
+                EsIEPS,             EsISH,              EsGravable,         Estatus,        IDDepartamento,
+                UUID,               FechaAct,           IDUsuario
+            )
+            VALUES(
+                Var_IDProducto,     Par_Producto,       Par_Costo,          Par_Precio,     Par_TipoVentaProd,
+                Par_EsIEPS,         Par_EsISH,          Par_EsGravable,     'A',            Par_IDDepartamento,
+                Par_UUID,           NOW(),              Par_IDUsuario
+            );
+
+        SET Par_Resultado := 'Producto registrado correctamente.';
+        SET Par_NumResultado := 0;
+        SET Par_IDProducto := Var_IDProducto;
     END BODY;
+
+    IF(Par_MostrarResultado = 'S') THEN
+        SELECT Par_NumResultado, Par_Resultado, Par_IDProducto;
+    END IF;
 END$$
