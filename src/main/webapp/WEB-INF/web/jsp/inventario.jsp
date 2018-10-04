@@ -69,45 +69,49 @@
 
                         <form id="formularioPrincipal">
                             <div class="row">
-                                <div class="col-md-1 col-xs-3">ID:</div>
-                                <div class="col-md-2 col-xs-5">
+                                <div class="col-3 col-md-2">ID:</div>
+                                <div class="col-9 col-md-2">
                                     <input type="text" name="id" id="id" size="5" tabindex="1" />
                                     <a href="#" id="play"><i class="fa fa-play fa-lg"></i></a>
                                 </div>
                             </div>
+
                             <div class="row">
-                                <div class="col-md-1 col-xs-3">Nombre:</div>
-                                <div class="col-md-2 col-xs-5"><input type="text" name="nombre" id="nombre" disabled="disabled" tabindex="2"/></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-1 col-xs-3">Costo:</div>
-                                <div class="col-md-2 col-xs-5"><input type="text" name="costo" id="costo" disabled="disabled" tabindex="3"/></div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-1 col-xs-3">Precio:</div>
-                                <div class="col-md-2 col-xs-5"><input type="text" name="precio" id="precio" disabled="disabled" tabindex="4"/></div>
+                                <div class="col-3 col-md-2">Nombre:</div>
+                                <div class="col-9 col-md-2"><input type="text" name="nombre" id="nombre" disabled="disabled" tabindex="2"/></div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-3 col-xs-8"><hr/></div>
+                                <div class="col-3 col-md-2">Costo:</div>
+                                <div class="col-9 col-md-2"><input type="text" name="costo" id="costo" disabled="disabled" tabindex="3"/></div>
+
+                                <div class="col-3 col-md-2">Precio:</div>
+                                <div class="col-9 col-md-2"><input type="text" name="precio" id="precio" disabled="disabled" tabindex="4"/></div>
                             </div>
 
                             <div class="row">
-                                <div class="col-md-1 col-xs-3">Codigo de Barras:</div>
-                                <div class="col-md-2 col-xs-5"><input type="text" name="codigoBarras" id="codigoBarras" disabled="disabled" tabindex="5"/></div>
+                                <div class="col-md-12 col-xs-12"><hr/></div>
                             </div>
+
                             <div class="row">
-                                <div class="col-md-1 col-xs-3">Cantidad actual:</div>
-                                <div class="col-md-2 col-xs-5"><input type="text" name="cantidad" id="cantidad" disabled="disabled" tabindex="6"/></div>
+                                <div class="col-3 col-md-2">Codigo barras:</div>
+                                <div class="col-9 col-md-2"><input type="text" name="codigoBarras" id="codigoBarras" disabled="disabled" tabindex="5"/></div>
+
+                                <div class="col-3 col-md-2">Codigo rapido:</div>
+                                <div class="col-9 col-md-2"><input type="text" name="codigoRapido" id="codigoRapido" disabled="disabled" tabindex="5"/></div>
                             </div>
+
                             <div class="row">
-                                <div class="col-md-1 col-xs-3">Cantidad minima:</div>
-                                <div class="col-md-2 col-xs-5"><input type="text" name="cantidadMinima" id="cantidadMinima" disabled="disabled" tabindex="7"/></div>
+                                <div class="col-3 col-md-2">Cantidad actual:</div>
+                                <div class="col-9 col-md-2"><input type="text" name="cantidad" id="cantidad" disabled="disabled" tabindex="6"/></div>
+
+                                <div class="col-3 col-md-2">Cantidad minima:</div>
+                                <div class="col-9 col-md-2"><input type="text" name="cantidadMinima" id="cantidadMinima" disabled="disabled" tabindex="7"/></div>
                             </div>
 
                             <br/>
                             <div class="row">
-                                <div class="col-md-6 col-xs-12">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
                                     <button type="button" class="btn btn-primary" disabled="disable" id="agregar" tabindex="8">Agregar</button>
                                     <button type="button" class="btn btn-default" disabled="disable" id="modificar" tabindex="9">Modificar</button>
                                     <button type="button" class="btn btn-default" disabled="disable" id="eliminar" tabindex="10">Eliminar</button>

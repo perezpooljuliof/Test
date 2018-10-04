@@ -10,12 +10,15 @@ CREATE PROCEDURE PRODUCTOACT (
     Par_Producto                VARCHAR(100),       -- Nombre del Producto
     Par_Costo                   DECIMAL(10,2),      -- Costo
     Par_Precio                  DECIMAL(10,2),      -- Precio
-    Par_EsGravable              CHAR(1),            -- Es Gravable
+    Par_Codigo                  VARCHAR(40),        -- Codigo de Barras
     Par_TipoVentaProd           CHAR(1),            -- Tipo de Venta del producto (U = Unidad/Pza, G = Granel)
+    Par_EsGravable              CHAR(1),            -- Es Gravable
     Par_EsIEPS                  CHAR(1),            -- Es IEPS
     Par_EsISH                   CHAR(1),            -- Es ISH
     Par_Estatus                 CHAR(1),            -- Estatus del producto (Alta por defecto)
     Par_IDDepartamento          INT,                -- ID del Departamento
+    Par_CantidadMinima          DECIMAL(6,2),       -- Cantidad minima
+    Par_CantidadMaxima          DECIMAL(6,2),       -- Cantidad maxima
 
     Par_UUID                    VARCHAR(50),        -- Identificador de la transaccion
     Par_IDUsuario               INT,                -- Ultimo usuario en realizar la actualizacion
@@ -31,13 +34,16 @@ BEGIN
 
     -- Asignacion de valores por defecto
     SET Par_Producto 		    := IFNULL(Par_Producto, '');
-    SET Par_Precio 				:= IFNULL(Par_Precio, 0.0);
     SET Par_Costo 				:= IFNULL(Par_Costo, 0.0);
+    SET Par_Precio 				:= IFNULL(Par_Precio, 0.0);
+    SET Par_Codigo              := IFNULL(Par_Codigo, '');
     SET Par_TipoVentaProd       := IFNULL(Par_TipoVentaProd, '');
     SET Par_EsGravable          := IFNULL(Par_EsGravable, 'N');
     SET Par_EsIEPS              := IFNULL(Par_EsIEPS, 'N');
     SET Par_EsISH               := IFNULL(Par_EsISH, 'N');
     SET Par_IDDepartamento      := IFNULL(Par_IDDepartamento, 0);
+    SET Par_CantidadMinima 	    := IFNULL(Par_CantidadMinima, 0.0);
+    SET Par_CantidadMaxima 		:= IFNULL(Par_CantidadMaxima, 0.0);
 
     SET Par_UUID                := IFNULL(Par_UUID, '');
     SET Par_IDUsuario 		    := IFNULL(Par_IDUsuario, 0);
@@ -83,6 +89,18 @@ BEGIN
 
             IF(Par_EsISH NOT IN ('S', 'N')) THEN
                 SET Par_Resultado := 'Especifique si el producto genera ISH (S = SI, N = NO)';
+                SET Par_NumResultado := 1;
+                LEAVE BODY;
+            END IF;
+
+            IF(Par_CantidadMinima < 0) THEN
+                SET Par_Resultado := 'Especifique una cantidad minima valida';
+                SET Par_NumResultado := 1;
+                LEAVE BODY;
+            END IF;
+
+            IF(Par_CantidadMaxima < 0) THEN
+                SET Par_Resultado := 'Especifique una cantidad maxima valida';
                 SET Par_NumResultado := 1;
                 LEAVE BODY;
             END IF;
