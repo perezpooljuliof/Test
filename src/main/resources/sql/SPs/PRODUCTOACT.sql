@@ -20,13 +20,13 @@ CREATE PROCEDURE PRODUCTOACT (
     Par_CantidadMinima          DECIMAL(6,2),       -- Cantidad minima
     Par_CantidadMaxima          DECIMAL(6,2),       -- Cantidad maxima
 
-    Par_UUID                    VARCHAR(50),        -- Identificador de la transaccion
-    Par_IDUsuario               INT,                -- Ultimo usuario en realizar la actualizacion
-
     Par_NumOpcion               INT,                -- Numero de Opcion
     Par_MostrarResultado        CHAR(1),            -- Opcion para habilitar salida de resultado en pantalla
     INOUT Par_NumResultado      INT,                -- Numero de resultado
-    INOUT Par_Resultado         VARCHAR(200)        -- Descripcion del resultado
+    INOUT Par_Resultado         VARCHAR(200),       -- Descripcion del resultado
+
+    Par_UUID                    VARCHAR(50),        -- Identificador de la transaccion
+    Par_IDUsuario               INT                 -- Ultimo usuario en realizar la actualizacion
 )
 BEGIN
     -- Declaracion de variables

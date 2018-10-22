@@ -11,22 +11,24 @@ CREATE PROCEDURE PRODUCTOALT (
     Par_Costo                   DECIMAL(10,2),      -- Costo
     Par_Precio                  DECIMAL(10,2),      -- Precio
     Par_CodigoRapido            VARCHAR(10),        -- Codigo de Barras
+
     Par_CodigoBarras            VARCHAR(40),        -- Codigo de Barras
     Par_TipoVentaProd           CHAR(1),            -- Tipo de Venta del producto (U = Unidad/Pza, G = Granel)
     Par_EsGravable              CHAR(1),            -- Es Gravable
     Par_EsIEPS                  CHAR(1),            -- Es IEPS
     Par_EsISH                   CHAR(1),            -- Es ISH
+
     Par_Estatus                 CHAR(1),            -- Estatus del producto (Alta por defecto)
     Par_IDDepartamento          INT,                -- ID del Departamento
     Par_CantidadMinima          DECIMAL(6,2),       -- Cantidad minima
     Par_CantidadMaxima          DECIMAL(6,2),       -- Cantidad maxima
 
-    Par_UUID                    VARCHAR(50),        -- Identificador de la transaccion
-    Par_IDUsuario               INT,                -- Ultimo usuario en realizar la actualizacion
-
     Par_MostrarResultado        CHAR(1),            -- Opcion para habilitar salida de resultado en pantalla
     INOUT Par_NumResultado      INT,                -- Numero de resultado
-    INOUT Par_Resultado         VARCHAR(200)        -- Descripcion del resultado
+    INOUT Par_Resultado         VARCHAR(200),        -- Descripcion del resultado
+
+    Par_UUID                    VARCHAR(50),        -- Identificador de la transaccion
+    Par_IDUsuario               INT                 -- Ultimo usuario en realizar la actualizacion
 )
 BEGIN
     -- Declaracion de variables
@@ -150,14 +152,16 @@ BEGIN
         END IF;
 
         INSERT INTO PRODUCTO(
-                IDProducto,         Producto,           Costo,              Precio,         TipoVentaProd,
-                EsIEPS,             EsISH,              EsGravable,         Estatus,        IDDepartamento,
-                CodigoRapido,       CodigoBarras,       UUID,               FechaAct,           IDUsuario
+                IDProducto,         Producto,           Costo,              Precio,             TipoVentaProd,
+                EsIEPS,             EsISH,              EsGravable,         Estatus,            IDDepartamento,
+                CodigoRapido,       CodigoBarras,       CantidadMinima,     Cantidadmaxima,     UUID,
+                FechaAct,           IDUsuario
             )
             VALUES(
-                Var_IDProducto,     Par_Producto,       Par_Costo,          Par_Precio,     Par_TipoVentaProd,
-                Par_EsIEPS,         Par_EsISH,          Par_EsGravable,     'A',            Par_IDDepartamento,
-                Par_CodigoRapido,   Par_CodigoBarras,   Par_UUID,           NOW(),              Par_IDUsuario
+                Var_IDProducto,     Par_Producto,       Par_Costo,          Par_Precio,         Par_TipoVentaProd,
+                Par_EsIEPS,         Par_EsISH,          Par_EsGravable,     'A',                Par_IDDepartamento,
+                Par_CodigoRapido,   Par_CodigoBarras,   Par_CantidadMinima, Par_CantidadMaxima, Par_UUID,
+                NOW(),              Par_IDUsuario
             );
 
         SET Par_Resultado := 'Producto registrado correctamente.';
@@ -166,6 +170,6 @@ BEGIN
     END BODY;
 
     IF(Par_MostrarResultado = 'S') THEN
-        SELECT Par_NumResultado, Par_Resultado, Par_IDProducto;
+        SELECT Par_NumResultado NumResultado, Par_Resultado Resultado, Par_IDProducto IDProducto;
     END IF;
 END$$
