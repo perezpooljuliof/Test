@@ -1,27 +1,27 @@
 package mx.com.example.test.dto;
 
 public class Producto {
-    private int idProducto;
+    private String idProducto;
     private String producto;
-    private Double costo;
-    private Double precio;
+    private String costo;
+    private String precio;
     private String codigoRapido;
     private String codigoBarras;
     private String tipoVentaProd;
-    private boolean esGravable;
-    private boolean esIEPS;
-    private boolean esISH;
-    private boolean estatus;
-    private int idDepartamento;
-    private double cantidadMinima;
-    private double cantidadMaxima;
+    private String esGravable;
+    private String esIEPS;
+    private String esISH;
+    private String estatus;
+    private String idDepartamento;
+    private String cantidadMinima;
+    private String cantidadMaxima;
 
 
-    public int getIdProducto() {
+    public String getIdProducto() {
         return idProducto;
     }
 
-    public void setIdProducto(int idProducto) {
+    public void setIdProducto(String idProducto) {
         this.idProducto = idProducto;
     }
 
@@ -33,19 +33,19 @@ public class Producto {
         this.producto = producto;
     }
 
-    public Double getCosto() {
+    public String getCosto() {
         return costo;
     }
 
-    public void setCosto(Double costo) {
+    public void setCosto(String costo) {
         this.costo = costo;
     }
 
-    public Double getPrecio() {
+    public String getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Double precio) {
+    public void setPrecio(String precio) {
         this.precio = precio;
     }
 
@@ -73,59 +73,59 @@ public class Producto {
         this.tipoVentaProd = tipoVentaProd;
     }
 
-    public boolean isEsGravable() {
+    public String getEsGravable() {
         return esGravable;
     }
 
-    public void setEsGravable(boolean esGravable) {
+    public void setEsGravable(String esGravable) {
         this.esGravable = esGravable;
     }
 
-    public boolean isEsIEPS() {
+    public String getEsIEPS() {
         return esIEPS;
     }
 
-    public void setEsIEPS(boolean esIEPS) {
+    public void setEsIEPS(String esIEPS) {
         this.esIEPS = esIEPS;
     }
 
-    public boolean isEsISH() {
+    public String getEsISH() {
         return esISH;
     }
 
-    public void setEsISH(boolean esISH) {
+    public void setEsISH(String esISH) {
         this.esISH = esISH;
     }
 
-    public boolean isEstatus() {
+    public String getEstatus() {
         return estatus;
     }
 
-    public void setEstatus(boolean estatus) {
+    public void setEstatus(String estatus) {
         this.estatus = estatus;
     }
 
-    public int getIdDepartamento() {
+    public String getIdDepartamento() {
         return idDepartamento;
     }
 
-    public void setIdDepartamento(int idDepartamento) {
+    public void setIdDepartamento(String idDepartamento) {
         this.idDepartamento = idDepartamento;
     }
 
-    public double getCantidadMinima() {
+    public String getCantidadMinima() {
         return cantidadMinima;
     }
 
-    public void setCantidadMinima(double cantidadMinima) {
+    public void setCantidadMinima(String cantidadMinima) {
         this.cantidadMinima = cantidadMinima;
     }
 
-    public double getCantidadMaxima() {
+    public String getCantidadMaxima() {
         return cantidadMaxima;
     }
 
-    public void setCantidadMaxima(double cantidadMaxima) {
+    public void setCantidadMaxima(String cantidadMaxima) {
         this.cantidadMaxima = cantidadMaxima;
     }
 }

@@ -3,7 +3,7 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context
@@ -19,6 +19,7 @@
 
     <mvc:resources mapping="/resources/**" location="/resources/" />
     <mvc:resources mapping="/js/**" location="/WEB-INF/web/js/" />
+
 
     <mvc:annotation-driven>
         <mvc:message-converters>
@@ -37,5 +38,4 @@
         <property name = "prefix" value = "/WEB-INF/web/jsp/" />
         <property name = "suffix" value = ".jsp" />
     </bean>
-
 </beans>

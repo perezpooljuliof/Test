@@ -228,12 +228,13 @@
             <version>0.9.0</version>
         </dependency>
 
-
+        <!-- Redis Session -->
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session</artifactId>
             <version>1.3.2.RELEASE</version>
         </dependency>
+        <!--
         <dependency>
             <groupId>org.springframework.session</groupId>
             <artifactId>spring-session-data-redis</artifactId>
@@ -255,7 +256,7 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
             <version>1.4.7.RELEASE</version>
         </dependency>
-
+        -->
 
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -267,9 +268,7 @@
         <dependency>
             <groupId>mx.com.core</groupId>
             <artifactId>Core</artifactId>
-            <scope>system</scope>
             <version>1.0</version>
-            <systemPath>${basedir}/../Core/target/Core-1.0.jar</systemPath>
         </dependency>
 
         <!-- Apache -->
@@ -300,7 +299,7 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <url>http://localhost:8085/manager/text</url>
+                    <url>http://localhost:8082/manager/text</url>
                     <server>TomcatServer</server>
                     <path>/Test</path>
                     <update>true</update>

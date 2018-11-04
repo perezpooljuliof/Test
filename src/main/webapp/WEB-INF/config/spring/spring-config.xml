@@ -15,8 +15,10 @@
 		http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+    <context:component-scan base-package = "mx.com.example.test" />
+
+    <import resource="spring-jdbc.xml"/>
 	<import resource="spring-mvc.xml"/>
-	<import resource="spring-jdbc.xml"/>
     <import resource="spring-security.xml"/>
 	<!--<import resource="spring-log.xml"/>-->
 </beans>

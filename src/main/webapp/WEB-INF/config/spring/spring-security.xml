@@ -12,17 +12,7 @@
         http://www.springframework.org/schema/security/spring-security.xsd">
 
     <context:annotation-config/>
-    <!--<context:property-placeholder location="classpath:application.properties" />-->
-
     <global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
-
-    <!-- Excepciones de Seguridad -->
-    <!--
-    <http use-expressions="true" pattern="/resources/**" security="permitAll"/>
-    <http use-expressions="true" pattern="/js/**" security="permitAll"/>
-    <http use-expressions="true" pattern="/page/index" security="permitAll"/>
-    <http use-expressions="true" pattern="/page/inventario" security="permitAll"/>
-    -->
 
     <!-- Stateless RESTful service using Basic authentication -->
     <http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint" create-session="stateless"
@@ -33,18 +23,26 @@
         <csrf disabled="true"/>
     </http>
 
+    <http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint" create-session="stateless"
+          access-decision-manager-ref="accessDecisionManager" pattern="/admin/**">
+        <intercept-url pattern="/admin/altaProducto" access="permitAll" />
+        <intercept-url pattern="/admin/**" access="permitAll" />
+        <!--Cambio del <form-login> -->
+        <custom-filter position="FORM_LOGIN_FILTER" ref="jwtAuthenticationFilter" />
+        <csrf disabled="true"/>
+    </http>
+
     <!-- Additional filter chain for normal users, matching all other requests -->
     <http use-expressions="true" pattern="/**">
-
-        <intercept-url pattern="/page/login" access="permitAll" />
-
         <intercept-url pattern="/resources/**" access="permitAll" />
         <intercept-url pattern="/js/**" access="permitAll" />
+        <intercept-url pattern="/page/login" access="permitAll" />
         <intercept-url pattern="/page/index" access="permitAll" />
+
         <intercept-url pattern="/page/inventario" access="permitAll" />
 
-        <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
 
+        <intercept-url pattern="/**" access="permitAll" />
         <form-login login-page='/page/login'
                     login-processing-url="/page/appLogin"
                     username-parameter="app_username"
@@ -52,9 +50,7 @@
                     default-target-url="/page/admin"
                     authentication-failure-url="/page/login?error"
                     always-use-default-target="true"/>
-
         <logout logout-success-url="/page/login?logout" />
-
         <csrf />
     </http>
 

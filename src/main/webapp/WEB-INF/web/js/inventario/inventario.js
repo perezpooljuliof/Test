@@ -40,4 +40,14 @@ $(document).ready(function() {
         enableChildElements('formularioPrincipal', enabled);
         $("#agregar").prop("disabled", true);
     }
+
+    $( "#agregar" ).click(function( event ) {
+      // Send the data using post
+      var posting = $.post( "/Test/admin/altaProducto", { "producto":"Producto Prueba" } );
+
+      // Put the results in a div
+      posting.done(function( data ) {
+        console.log(data);
+      });
+    });
 });//Termina callbak $( document ).ready

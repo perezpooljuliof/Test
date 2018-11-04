@@ -134,16 +134,19 @@ BEGIN
             LEAVE BODY;
         END IF;
 
-        SELECT IDProducto INTO Var_IDProductoIgual
-            FROM PRODUCTO
-            WHERE CodigoRapido = Par_CodigoRapido
-            LIMIT 1;
+        IF(Par_CodigoRapido <> '') THEN
+            SELECT IDProducto INTO Var_IDProductoIgual
+                FROM PRODUCTO
+                WHERE CodigoRapido = Par_CodigoRapido
+                LIMIT 1;
 
-        IF(Var_IDProductoIgual IS NOT NULL) THEN
-            SET Par_Resultado := 'Existe un producto con el mismo codigo rapido, especifique un codigo diferente.';
-            SET Par_NumResultado := 1;
-            LEAVE BODY;
+            IF(Var_IDProductoIgual IS NOT NULL) THEN
+                SET Par_Resultado := 'Existe un producto con el mismo codigo rapido, especifique un codigo diferente.';
+                SET Par_NumResultado := 1;
+                LEAVE BODY;
+            END IF;
         END IF;
+
 
         CALL MAESTROLLAVESPRO ('PRODUCTO', Var_IDProducto, Par_NumResultado, Par_Resultado);
 

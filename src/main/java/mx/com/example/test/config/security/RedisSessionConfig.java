@@ -1,4 +1,4 @@
-package mx.com.example.test.config.security;
+/*package mx.com.example.test.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +24,7 @@ public class RedisSessionConfig {
         connectionFactory.setPassword(null);
         return connectionFactory;
     }
-
+*/
 
     /*
     @Bean
@@ -105,5 +105,7 @@ public class RedisSessionConfig {
         template.setValueSerializer( new GenericToStringSerializer< Object >( Object.class ) );
         return template;
     }
-    */
+
+
 }
+*/

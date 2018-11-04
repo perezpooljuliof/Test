@@ -67,7 +67,7 @@
                     <div id="home" class="tab-pane fade in active">
                         <h3>Productos</h3>
 
-                        <form id="formularioPrincipal">
+                        <form id="formularioPrincipal" method="POST" action="/admin/altaProducto">
                             <div class="row">
                                 <div class="col-3 col-md-2">ID:</div>
                                 <div class="col-9 col-md-2">

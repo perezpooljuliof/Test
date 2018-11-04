@@ -1,7 +1,9 @@
 package mx.com.example.test.controller;
 
 
+import mx.com.example.test.dto.Producto;
 import org.apache.log4j.Logger;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,5 +26,4 @@ public class SprinRestController {
 		session.setAttribute("success" , "successfully accessed");
 		return "response";
 	}
-
 }

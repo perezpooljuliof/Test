@@ -27,4 +27,8 @@
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="dataSource"></property>
     </bean>
+
+    <bean id="mysqlAutoEjecutable" class="mx.com.core.db.MySQLAutoEjecutable" >
+        <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
 </beans>
