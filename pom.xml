@@ -109,6 +109,12 @@
             <artifactId>spring-expression</artifactId>
             <version>${spring.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-oxm -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-oxm</artifactId>
+            <version>5.1.2.RELEASE</version>
+        </dependency>
 
         <!-- Spring JDBC Support -->
         <dependency>
@@ -299,12 +305,37 @@
                 <artifactId>tomcat7-maven-plugin</artifactId>
                 <version>2.2</version>
                 <configuration>
-                    <url>http://localhost:8082/manager/text</url>
+                    <url>http://localhost:8080/manager/text</url>
                     <server>TomcatServer</server>
                     <path>/Test</path>
                     <update>true</update>
                 </configuration>
             </plugin>
+
+            <!--
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <version>0.12.3</version>
+                <executions>
+                    <execution>
+                        <id>score</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <schemaLanguage>WSDL</schemaLanguage>
+                            <schemaDirectory>${basedir}/src/main/resources/wsdl</schemaDirectory>
+                            <schemaIncludes>
+                                <include>consultas.wsdl</include>
+                            </schemaIncludes>
+                            <generatePackage>mx.com.example.test.wsdl</generatePackage>
+                            <generateDirectory>${project.build.directory}/generated-sources/score</generateDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            -->
         </plugins>
     </build>
 </project>

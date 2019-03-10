@@ -15,11 +15,11 @@
 		http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <context:component-scan base-package = "mx.com.example.test.controller" />
+    <context:component-scan base-package = "mx.com.example.test.application.producto.controller" />
 
     <mvc:resources mapping="/resources/**" location="/resources/" />
     <mvc:resources mapping="/js/**" location="/WEB-INF/web/js/" />
-
+    <mvc:resources mapping="/css/**" location="/WEB-INF/web/css/" />
 
     <mvc:annotation-driven>
         <mvc:message-converters>
@@ -37,5 +37,13 @@
     <bean class = "org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name = "prefix" value = "/WEB-INF/web/jsp/" />
         <property name = "suffix" value = ".jsp" />
+    </bean>
+
+    <bean id="jaxb2Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <property name="packagesToScan">
+            <list>
+                <value>mx.com.example.test.wsdl</value>
+            </list>
+        </property>
     </bean>
 </beans>

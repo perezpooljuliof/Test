@@ -26,6 +26,7 @@ public class RestAuthenticationEntryPoint extends BasicAuthenticationEntryPoint 
                          final HttpServletResponse response,
                          final AuthenticationException authException) throws IOException, ServletException {
         System.out.println("RestAuthenticationEntryPoint.commence()>>>>>");
+        System.out.println("URL:" + request.getRequestURL());
         //Authentication failed, send error response.
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.addHeader("WWW-Authenticate", "Basic realm=" + getRealmName() + "");
@@ -36,6 +37,7 @@ public class RestAuthenticationEntryPoint extends BasicAuthenticationEntryPoint 
 
     @Override
     public void afterPropertiesSet() throws Exception {
+        System.out.println("RestAuthenticationEntryPoint.afterPropertiesSet()>>>>>");
         setRealmName(getRealmName());
         super.afterPropertiesSet();
     }

@@ -1,8 +1,8 @@
 package mx.com.example.test;
 
 /*
-import mx.com.example.test.controller.SprinRestController;
-import mx.com.example.test.dto.bean.Student;
+import mx.com.example.test.application.producto.controller.ProductoRestController;
+import mx.com.example.test.application.producto.dto.bean.Student;
 import org.apache.log4j.Logger;
 import org.junit.Before;
 import org.junit.Test;

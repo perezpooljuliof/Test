@@ -16,38 +16,39 @@
 
     <!-- Stateless RESTful service using Basic authentication -->
     <http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint" create-session="stateless"
-                access-decision-manager-ref="accessDecisionManager" pattern="/rest/**">
-        <intercept-url pattern="/rest/**" access="hasRole('ROLE_USER')"/>
-        <!--Cambio del <form-login> -->
+                access-decision-manager-ref="accessDecisionManager" pattern="/Rest/**">
+        <intercept-url pattern="/**" access="isAuthenticated()"/>
         <custom-filter position="FORM_LOGIN_FILTER" ref="jwtAuthenticationFilter" />
         <csrf disabled="true"/>
     </http>
 
+    <!-- Stateless RESTful service using Basic authentication -->
+    <!--
     <http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint" create-session="stateless"
           access-decision-manager-ref="accessDecisionManager" pattern="/admin/**">
-        <intercept-url pattern="/admin/altaProducto" access="permitAll" />
-        <intercept-url pattern="/admin/**" access="permitAll" />
-        <!--Cambio del <form-login> -->
+        <intercept-url pattern="/**" access="permitAll" />
         <custom-filter position="FORM_LOGIN_FILTER" ref="jwtAuthenticationFilter" />
         <csrf disabled="true"/>
     </http>
+    -->
 
     <!-- Additional filter chain for normal users, matching all other requests -->
     <http use-expressions="true" pattern="/**">
+        <intercept-url pattern="/Web/Producto/Inventario" access="permitAll" />
+        <intercept-url pattern="/Web/Producto/Index" access="permitAll" />
+
+        <!-- Resources -->
         <intercept-url pattern="/resources/**" access="permitAll" />
         <intercept-url pattern="/js/**" access="permitAll" />
-        <intercept-url pattern="/page/login" access="permitAll" />
-        <intercept-url pattern="/page/index" access="permitAll" />
+        <intercept-url pattern="/css/**" access="permitAll" />
 
-        <intercept-url pattern="/page/inventario" access="permitAll" />
+        <intercept-url pattern="/**" access="isAuthenticated()" />
 
-
-        <intercept-url pattern="/**" access="permitAll" />
         <form-login login-page='/page/login'
                     login-processing-url="/page/appLogin"
                     username-parameter="app_username"
                     password-parameter="app_password"
-                    default-target-url="/page/admin"
+                    default-target-url="/page/index"
                     authentication-failure-url="/page/login?error"
                     always-use-default-target="true"/>
         <logout logout-success-url="/page/login?logout" />
@@ -62,7 +63,9 @@
     <beans:bean id="restAuthenticationSuccessHandler" class="mx.com.example.test.config.security.RestAuthenticationSuccessHandler" />
 
     <beans:bean id="jwtAuthenticationFilter" class="mx.com.example.test.config.security.JwtAuthenticationFilter">
-        <beans:constructor-arg type="java.lang.String"><beans:value>/rest/**</beans:value></beans:constructor-arg>
+        <beans:constructor-arg type="java.lang.String">
+            <beans:value>/Rest/**</beans:value>
+        </beans:constructor-arg>
         <beans:property name="authenticationManager" ref="authenticationManager" />
         <beans:property name="authenticationSuccessHandler" ref="restAuthenticationSuccessHandler" />
     </beans:bean>
@@ -91,5 +94,4 @@
             </user-service>
         </authentication-provider>
     </authentication-manager>
-
 </beans:beans>

@@ -23,6 +23,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
 
     public JwtAuthenticationFilter(String url) {
         super(url);
+        System.out.println("JwtAuthenticationFilter(" + url + ")");
     }
 
     @Override
@@ -49,7 +50,7 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
      */
     private Authentication getAuthByLogin(HttpServletRequest request) {
         System.out.println("JwtAuthenticationFilter.getAuthByLogin()>>>>>>>>>>>>>>>");
-        String xAuth = request.getHeader("Authentication");
+        String xAuth = request.getHeader("Autorizacion");
 
         Authentication auth = null;
 

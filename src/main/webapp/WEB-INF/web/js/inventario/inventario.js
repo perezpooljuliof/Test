@@ -50,4 +50,19 @@ $(document).ready(function() {
         console.log(data);
       });
     });
+
+
 });//Termina callbak $( document ).ready
+
+    function consume() {
+        console.log("consumiendo");
+        $.ajax({
+             type: "POST",
+             dataType: "json",
+             url: "/Test/rest/altaProducto",
+             data: {},
+             success: function(data){
+                alert(data);
+             }
+         });
+    }
