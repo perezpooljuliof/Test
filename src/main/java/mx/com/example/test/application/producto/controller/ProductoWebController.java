@@ -36,12 +36,13 @@ public class ProductoWebController {
 
     @RequestMapping(value = {"/Inventario"}, method = RequestMethod.GET)
     public String inventario(ModelMap model) throws Exception {
+        logger.info("inventario()>>>>>>>>>>>>>>><");
         return "producto/inventario";
     }
 
 
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/Login", method = RequestMethod.GET)
     public ModelAndView login(
         @RequestParam(value = "error", required = false) String error,
         @RequestParam(value = "logout", required = false) String logout) {

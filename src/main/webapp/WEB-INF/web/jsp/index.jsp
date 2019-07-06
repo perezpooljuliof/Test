@@ -52,6 +52,6 @@
         <!--Footer-->
         <%@include file="base/footer.html" %>
 
-        <%@include file="modal.html" %>
+        <%@include file="base/modal.html" %>
     </body>
 </html>

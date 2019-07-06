@@ -34,7 +34,7 @@
 
     <!-- Additional filter chain for normal users, matching all other requests -->
     <http use-expressions="true" pattern="/**">
-        <intercept-url pattern="/Web/Producto/Inventario" access="permitAll" />
+        <intercept-url pattern="/Web/Producto/Login" access="permitAll" />
         <intercept-url pattern="/Web/Producto/Index" access="permitAll" />
 
         <!-- Resources -->
@@ -44,14 +44,14 @@
 
         <intercept-url pattern="/**" access="isAuthenticated()" />
 
-        <form-login login-page='/page/login'
-                    login-processing-url="/page/appLogin"
+        <form-login login-page='/Web/Producto/Login'
+                    login-processing-url="/Web/Producto/appLogin"
                     username-parameter="app_username"
                     password-parameter="app_password"
-                    default-target-url="/page/index"
-                    authentication-failure-url="/page/login?error"
+                    default-target-url="/Web/Producto/Index"
+                    authentication-failure-url="/Web/Producto/Login?error"
                     always-use-default-target="true"/>
-        <logout logout-success-url="/page/login?logout" />
+        <logout logout-success-url="/Web/Producto/Login?logout" />
         <csrf />
     </http>
 
