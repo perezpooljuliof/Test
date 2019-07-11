@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 /**
  * This class just returns HTTP code 401 (Unauthorized) when authentication fails, overriding default Spring’s redirecting.
  */
-public class RestAuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
+public class PermitAllRestAuthenticationEntryPoint extends BasicAuthenticationEntryPoint {
     /*
     @Autowired
     protected Log logger;
@@ -25,18 +25,18 @@ public class RestAuthenticationEntryPoint extends BasicAuthenticationEntryPoint 
     public void commence(final HttpServletRequest request,
                          final HttpServletResponse response,
                          final AuthenticationException authException) throws IOException, ServletException {
-        System.out.println("RestAuthenticationEntryPoint.commence()>>>>>");
+        System.out.println("PermitAllRestAuthenticationEntryPoint.commence()>>>>>");
         //Authentication failed, send error response.
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setStatus(HttpServletResponse.SC_OK);
         response.addHeader("WWW-Authenticate", "Basic realm=" + getRealmName() + "");
 
         PrintWriter writer = response.getWriter();
-        writer.println("HTTP Status 401 : " + authException.getMessage());
+        writer.println("HTTP Status 200 : " + authException.getMessage());
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        System.out.println("RestAuthenticationEntryPoint.afterPropertiesSet()>>>>>");
+        System.out.println("PermitAllRestAuthenticationEntryPoint.afterPropertiesSet()>>>>>");
         setRealmName(getRealmName());
         super.afterPropertiesSet();
     }

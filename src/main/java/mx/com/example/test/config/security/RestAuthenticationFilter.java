@@ -1,3 +1,4 @@
+/*
 package mx.com.example.test.config.security;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -72,3 +73,4 @@ public class RestAuthenticationFilter extends OncePerRequestFilter {
         return token != null;
     }
 }
+*/

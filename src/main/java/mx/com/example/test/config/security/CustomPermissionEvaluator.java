@@ -1,3 +1,4 @@
+/*
 package mx.com.example.test.config.security;
 
 import org.springframework.security.access.PermissionEvaluator;
@@ -40,3 +41,4 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
         return false;
     }
 }
+*/

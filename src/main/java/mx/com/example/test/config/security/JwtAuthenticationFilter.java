@@ -29,9 +29,9 @@ public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFil
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         System.out.println("JwtAuthenticationFilter.attemptAuthentication()>>>>>");
-
-        //We get the user before validations
+        //Verificamos Token de Autentificacion Previa
         Authentication auth = getAuthByToken(request);
+        //En caso de no encontrar Token de Autentificacion revisamos en el Header
         if(auth == null) {
             auth = getAuthByLogin(request);
         }

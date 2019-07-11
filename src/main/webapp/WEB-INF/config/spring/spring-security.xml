@@ -14,25 +14,22 @@
     <context:annotation-config/>
     <global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
 
-    <!-- Stateless RESTful service using Basic authentication -->
+    <!-- Autentificacion para Servicios Rest -->
+    <http use-expressions="true" entry-point-ref="permitAllRestAuthenticationEntryPoint" create-session="stateless"
+          access-decision-manager-ref="accessDecisionManager" pattern="/Rest/Producto/**">
+        <intercept-url pattern="/**" access="permitAll"/>
+        <custom-filter position="FORM_LOGIN_FILTER" ref="jwtAuthenticationFilter" />
+        <csrf disabled="true"/>
+    </http>
+
     <http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint" create-session="stateless"
-                access-decision-manager-ref="accessDecisionManager" pattern="/Rest/**">
+          access-decision-manager-ref="accessDecisionManager" pattern="/Rest/Admin/**">
         <intercept-url pattern="/**" access="isAuthenticated()"/>
         <custom-filter position="FORM_LOGIN_FILTER" ref="jwtAuthenticationFilter" />
         <csrf disabled="true"/>
     </http>
 
-    <!-- Stateless RESTful service using Basic authentication -->
-    <!--
-    <http use-expressions="true" entry-point-ref="restAuthenticationEntryPoint" create-session="stateless"
-          access-decision-manager-ref="accessDecisionManager" pattern="/admin/**">
-        <intercept-url pattern="/**" access="permitAll" />
-        <custom-filter position="FORM_LOGIN_FILTER" ref="jwtAuthenticationFilter" />
-        <csrf disabled="true"/>
-    </http>
-    -->
-
-    <!-- Additional filter chain for normal users, matching all other requests -->
+    <!-- Autentificacion para Servicios Web -->
     <http use-expressions="true" pattern="/**">
         <intercept-url pattern="/Web/Producto/Login" access="permitAll" />
         <intercept-url pattern="/Web/Producto/Index" access="permitAll" />
@@ -57,14 +54,18 @@
 
     <!-- This is where spring sends requests which are not authenticated. -->
     <beans:bean id="restAuthenticationEntryPoint" class="mx.com.example.test.config.security.RestAuthenticationEntryPoint">
-        <beans:property name="realmName" value="cardinalRealmName" />
+        <beans:property name="realmName" value="piratasRealmName" />
+    </beans:bean>
+
+    <beans:bean id="permitAllRestAuthenticationEntryPoint" class="mx.com.example.test.config.security.PermitAllRestAuthenticationEntryPoint">
+        <beans:property name="realmName" value="piratasRealmName" />
     </beans:bean>
 
     <beans:bean id="restAuthenticationSuccessHandler" class="mx.com.example.test.config.security.RestAuthenticationSuccessHandler" />
 
     <beans:bean id="jwtAuthenticationFilter" class="mx.com.example.test.config.security.JwtAuthenticationFilter">
         <beans:constructor-arg type="java.lang.String">
-            <beans:value>/Rest/**</beans:value>
+            <beans:value>/Rest/Admin/**</beans:value>
         </beans:constructor-arg>
         <beans:property name="authenticationManager" ref="authenticationManager" />
         <beans:property name="authenticationSuccessHandler" ref="restAuthenticationSuccessHandler" />

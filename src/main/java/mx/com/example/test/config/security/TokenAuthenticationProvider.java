@@ -18,12 +18,10 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
         CustomAuthenticationToken customAuthenticationToken = null;
 
         if(authentication == null) {
-            System.out.println("authentication == null");
             return null;
         }
 
         if(!(authentication instanceof CustomAuthenticationToken)) {
-            System.out.println("authentication != CustomAuthenticationToken");
             return null;
         }
 
@@ -31,7 +29,6 @@ public class TokenAuthenticationProvider implements AuthenticationProvider {
 
         Date now = new Date();
         Date expirationDate = customAuthenticationToken.getExpiration();
-        System.out.println("now:" + now + " expirationDate:" + expirationDate);
         if(now.getTime() > expirationDate.getTime()) {
             return null;
         }
