@@ -311,31 +311,6 @@
                     <update>true</update>
                 </configuration>
             </plugin>
-
-            <!--
-            <plugin>
-                <groupId>org.jvnet.jaxb2.maven2</groupId>
-                <artifactId>maven-jaxb2-plugin</artifactId>
-                <version>0.12.3</version>
-                <executions>
-                    <execution>
-                        <id>score</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <schemaLanguage>WSDL</schemaLanguage>
-                            <schemaDirectory>${basedir}/src/main/resources/wsdl</schemaDirectory>
-                            <schemaIncludes>
-                                <include>consultas.wsdl</include>
-                            </schemaIncludes>
-                            <generatePackage>mx.com.example.test.wsdl</generatePackage>
-                            <generateDirectory>${project.build.directory}/generated-sources/score</generateDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            -->
         </plugins>
     </build>
 </project>
