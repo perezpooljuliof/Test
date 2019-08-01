@@ -154,6 +154,13 @@
             <version>${spring.version}</version>
         </dependency>
 
+        <!-- Spring SOAP -->
+        <dependency>
+            <groupId>org.jvnet.jax-ws-commons.spring</groupId>
+            <artifactId>jaxws-spring</artifactId>
+            <version>1.9</version>
+        </dependency>
+
         <!-- Java Web Token -->
         <dependency>
             <groupId>com.auth0</groupId>

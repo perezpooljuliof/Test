@@ -14,6 +14,9 @@
     <context:annotation-config/>
     <global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
 
+    <!-- SOAP -->
+    <http pattern="/jaxws-spring**" security="none"/>
+
     <!-- Autentificacion para Servicios Rest -->
     <http use-expressions="true" entry-point-ref="permitAllRestAuthenticationEntryPoint" create-session="stateless"
           access-decision-manager-ref="accessDecisionManager" pattern="/Rest/Producto/**">
@@ -29,6 +32,7 @@
         <csrf disabled="true"/>
     </http>
 
+
     <!-- Autentificacion para Servicios Web -->
     <http use-expressions="true" pattern="/**">
         <intercept-url pattern="/Web/Producto/Login" access="permitAll" />
@@ -37,6 +41,7 @@
         <!-- Resources -->
         <intercept-url pattern="/resources/**" access="permitAll" />
         <intercept-url pattern="/js/**" access="permitAll" />
+
         <intercept-url pattern="/css/**" access="permitAll" />
 
         <intercept-url pattern="/**" access="isAuthenticated()" />
