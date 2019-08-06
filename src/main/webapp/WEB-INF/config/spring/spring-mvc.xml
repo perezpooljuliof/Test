@@ -39,5 +39,5 @@
         <property name = "suffix" value = ".jsp" />
     </bean>
 
-    <import resource="spring-mvc-soap.xml"/>
+    <!--<import resource="spring-mvc-soap.xml"/>-->
 </beans>

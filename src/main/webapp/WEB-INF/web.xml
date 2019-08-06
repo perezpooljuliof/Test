@@ -10,12 +10,10 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>/WEB-INF/config/spring/spring-config.xml</param-value>
 	</context-param>
-
 	<context-param>
 		<param-name>log4jExposeWebAppRoot</param-name>
 		<param-value>false</param-value>
 	</context-param>
-
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
@@ -45,7 +43,6 @@
 		<servlet-name>jaxws-servlet</servlet-name>
 		<servlet-class>com.sun.xml.ws.transport.http.servlet.WSSpringServlet</servlet-class>
 	</servlet>
-
 	<servlet-mapping>
 		<servlet-name>jaxws-servlet</servlet-name>
 		<url-pattern>/jaxws-spring</url-pattern>
