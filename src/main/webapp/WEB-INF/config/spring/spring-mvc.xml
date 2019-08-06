@@ -38,6 +38,4 @@
         <property name = "prefix" value = "/WEB-INF/web/jsp/" />
         <property name = "suffix" value = ".jsp" />
     </bean>
-
-    <!--<import resource="spring-mvc-soap.xml"/>-->
 </beans>
