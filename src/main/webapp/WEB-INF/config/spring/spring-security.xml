@@ -32,7 +32,6 @@
     <!-- Autentificacion para Servicios Web -->
     <http use-expressions="true" pattern="/**">
         <intercept-url pattern="/Web/Producto/Login" access="permitAll" />
-        <intercept-url pattern="/Web/Producto/Index" access="permitAll" />
 
         <!-- Resources -->
         <intercept-url pattern="/resources/**" access="permitAll" />
@@ -45,7 +44,7 @@
                     login-processing-url="/Web/Producto/appLogin"
                     username-parameter="app_username"
                     password-parameter="app_password"
-                    default-target-url="/Web/Producto/Index"
+                    default-target-url="/Web/Producto/Inventario"
                     authentication-failure-url="/Web/Producto/Login?error"
                     always-use-default-target="true"/>
         <logout logout-success-url="/Web/Producto/Login?logout" />

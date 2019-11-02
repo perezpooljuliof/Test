@@ -39,6 +39,7 @@ public class ProductoRestController {
 
 	@RequestMapping(value = {"/Admin/altaProducto"}, method = RequestMethod.POST)
 	public BaseResultado altaProducto(@RequestBody Producto producto) {
+		System.out.println(this.getClass().getSimpleName() + ".altaProducto");
 		BaseResultado resultado = productoService.alta(producto);
 		return resultado;
 	}

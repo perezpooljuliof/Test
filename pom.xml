@@ -80,6 +80,11 @@
             <artifactId>jackson-module-parameter-names</artifactId>
             <version>${jackson-version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.4.9</version>
+        </dependency>
 
         <!-- Spring core -->
         <dependency>

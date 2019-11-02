@@ -15,6 +15,6 @@ CREATE TABLE CURINVDET (
     FechaAct            DATETIME        NOT NULL,       -- Fecha y hora de la ultima actualizacion
     IDUsuario           INT             NOT NULL,       -- Ultimo usuario en realizar la actualizacion
 
-    PRIMARY KEY(IDCurInv),
-    CONSTRAINT FK_CURINV_ALMACEN FOREIGN KEY(IDAlmacen) REFERENCES ALMACEN(IDAlmacen)
+    PRIMARY KEY(IDCurInvDet),
+    CONSTRAINT FK_CURINVDET_CURINV FOREIGN KEY(IDCurInv) REFERENCES CURINV(IDCurInv)
 )$$

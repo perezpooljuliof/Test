@@ -10,10 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,12 +58,17 @@ public class ProductoWebController {
         return model;
     }
 
-    @RequestMapping(value = {"/altaProducto"}, method = RequestMethod.POST)
-    public BaseResultado altaProducto(@RequestBody Producto producto) {
+    @RequestMapping(value = "/altaProducto", method = RequestMethod.POST)
+    public @ResponseBody Producto altaProducto(@RequestBody Producto producto) {
+        System.out.println(this.getClass().getSimpleName() + ".altaProducto");
+        System.out.println("IDProducto" + producto.getIdProducto());
+        System.out.println("producto" + producto.getProducto());
+        /*
         BaseResultado resultado = new BaseResultado();
         resultado.setNumResultado("1");
         resultado.setResultado("1");
-        return resultado;
+        */
+        return new Producto();
     }
 
     @RequestMapping(value="/logout", method = RequestMethod.GET)

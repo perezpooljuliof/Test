@@ -12,6 +12,6 @@ CREATE TABLE ALMACEN (
     FechaAct            DATETIME        NOT NULL,       -- Fecha y hora de la ultima actualizacion
     IDUsuario           INT             NOT NULL,       -- Ultimo usuario en realizar la actualizacion
 
-    PRIMARY KEY(IDDepartamento),
+    PRIMARY KEY(IDAlmacen),
     CONSTRAINT FK_ALMACEN_EMPRESA FOREIGN KEY(IDEmpresa) REFERENCES EMPRESA(IDEmpresa)
 )$$

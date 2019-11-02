@@ -37,7 +37,7 @@
         <!-- Seccion for Application -->
         <!-- Page JS and CSS -->
         <script type="text/javascript" src="<spring:url value='/js/base/utilidadesInput.js'/>"></script>
-        <script type="text/javascript" src="<spring:url value='/js/inventario/inventario.js'/>"></script>
+        <script type="text/javascript" src="<spring:url value='/js/producto/inventario.js'/>"></script>
     </head>
     <body>
         <!--Header-->
@@ -49,7 +49,7 @@
                 <div class="heading-content">
                     <h3>INVENTARIO</h3>
                 </div>
-
+                   <spring:url value='/js/base/utilidadesInput.js'/>
                 <ul class="nav nav-tabs">
                   <li class="active"><a data-toggle="tab" href="#home">Productos</a></li>
                 </ul>
