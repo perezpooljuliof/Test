@@ -15,9 +15,11 @@
 		http://www.springframework.org/schema/aop
 		http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <context:component-scan base-package = "mx.com.example.test" />
+	<context:component-scan base-package = "mx.com.example.test" >
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
 
     <import resource="spring-jdbc.xml"/>
 	<!--<import resource="spring-mvc.xml"/>-->
-    <!--<import resource="spring-security.xml"/>-->
+    <import resource="spring-security.xml"/>
 </beans>

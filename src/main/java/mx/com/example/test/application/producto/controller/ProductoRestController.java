@@ -37,7 +37,7 @@ public class ProductoRestController {
 		return "response";
 	}
 
-	@RequestMapping(value = {"/Admin/altaProducto"}, method = RequestMethod.POST)
+	@RequestMapping(value="/Admin/altaProducto", method = RequestMethod.POST)
 	public BaseResultado altaProducto(@RequestBody Producto producto) {
 		System.out.println(this.getClass().getSimpleName() + ".altaProducto");
 		BaseResultado resultado = productoService.alta(producto);
@@ -47,6 +47,13 @@ public class ProductoRestController {
 	@RequestMapping(value = {"/Admin/altaProducto2"}, method = RequestMethod.POST)
 	public BaseResultado altaProducto2(@RequestBody Producto producto) {
 		BaseResultado resultado = productoService.alta(producto);
+		return resultado;
+	}
+
+	@RequestMapping(value="/Admin/altaProductoTest", method = RequestMethod.POST)
+	public BaseResultado altaProducto3(@RequestBody Producto producto) {
+		System.out.println(this.getClass().getSimpleName() + ".altaProducto");
+		BaseResultado resultado = new BaseResultado();
 		return resultado;
 	}
 }

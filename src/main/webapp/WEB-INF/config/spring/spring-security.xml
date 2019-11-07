@@ -15,6 +15,7 @@
     <global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
 
     <!-- Autentificacion para Servicios Rest -->
+    <!--
     <http use-expressions="true" entry-point-ref="permitAllRestAuthenticationEntryPoint" create-session="stateless"
           access-decision-manager-ref="accessDecisionManager" pattern="/Rest/Producto/**">
         <intercept-url pattern="/**" access="permitAll"/>
@@ -28,6 +29,7 @@
         <custom-filter position="FORM_LOGIN_FILTER" ref="jwtAuthenticationFilter" />
         <csrf disabled="true"/>
     </http>
+    -->
 
     <!-- Autentificacion para Servicios Web -->
     <http use-expressions="true" pattern="/**">
@@ -48,10 +50,11 @@
                     authentication-failure-url="/Web/Producto/Login?error"
                     always-use-default-target="true"/>
         <logout logout-success-url="/Web/Producto/Login?logout" />
-        <csrf />
+        <csrf disabled="true"/>
     </http>
 
     <!-- This is where spring sends requests which are not authenticated. -->
+    <!--
     <beans:bean id="restAuthenticationEntryPoint" class="mx.com.example.test.config.security.RestAuthenticationEntryPoint">
         <beans:property name="realmName" value="piratasRealmName" />
     </beans:bean>
@@ -69,11 +72,13 @@
         <beans:property name="authenticationManager" ref="authenticationManager" />
         <beans:property name="authenticationSuccessHandler" ref="restAuthenticationSuccessHandler" />
     </beans:bean>
+    -->
 
     <beans:bean id="tokenAuthenticationProvider" class="mx.com.example.test.config.security.TokenAuthenticationProvider"/>
 
-    <beans:bean id ="passwordEncoder" class = "org.springframework.security.crypto.password.NoOpPasswordEncoder" factory-method = "getInstance" />
+    <beans:bean id="passwordEncoder" class="org.springframework.security.crypto.password.NoOpPasswordEncoder" factory-method="getInstance" />
 
+    <!--
     <beans:bean id="accessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased">
         <beans:constructor-arg>
             <beans:list>
@@ -84,6 +89,7 @@
             </beans:list>
         </beans:constructor-arg>
     </beans:bean>
+    -->
 
     <authentication-manager alias="authenticationManager">
         <authentication-provider ref="tokenAuthenticationProvider" />

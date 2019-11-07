@@ -4,6 +4,7 @@ package mx.com.example.test.application.producto.controller;
 import mx.com.core.db.BaseResultado;
 import mx.com.example.test.application.producto.dto.Producto;
 import org.apache.log4j.Logger;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,8 +38,6 @@ public class ProductoWebController {
         return "producto/inventario";
     }
 
-
-
     @RequestMapping(value = "/Login", method = RequestMethod.GET)
     public ModelAndView login(
         @RequestParam(value = "error", required = false) String error,
@@ -58,16 +57,12 @@ public class ProductoWebController {
         return model;
     }
 
-    @RequestMapping(value = "/altaProducto", method = RequestMethod.POST)
+    @RequestMapping(path = "/altaProducto", method = RequestMethod.POST)
     public @ResponseBody Producto altaProducto(@RequestBody Producto producto) {
         System.out.println(this.getClass().getSimpleName() + ".altaProducto");
         System.out.println("IDProducto" + producto.getIdProducto());
         System.out.println("producto" + producto.getProducto());
-        /*
-        BaseResultado resultado = new BaseResultado();
-        resultado.setNumResultado("1");
-        resultado.setResultado("1");
-        */
+
         return new Producto();
     }
 
@@ -83,6 +78,7 @@ public class ProductoWebController {
 
     @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
     public String accessDeniedPage(ModelMap model) {
+        System.out.println("accessDeniedPage()>>>>>>>>>>>>>>>>");
         model.addAttribute("user", getPrincipal());
         return "accessDenied";
     }

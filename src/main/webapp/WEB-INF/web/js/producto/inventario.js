@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    console.log("iniciando inventario>>>>>>>>>>");
     $( "#id" ).keydown(function( event ) {
         if ( event.which == 13 ) {
             addOrSearch();
@@ -46,7 +45,7 @@ $(document).ready(function() {
     });
 
     function consumeAltaProducto() {
-        console.log("agregar.click()>>>>>>>>>>>>>>>>>>>");
+        console.log("consumeAltaProducto(8)>>>>>>>>>>>>>>>>>>>");
         // Send the data using post
         var productoBean = {
         "idProducto":"1",
@@ -67,17 +66,17 @@ $(document).ready(function() {
 
         console.log(JSON.stringify(productoBean));
         request = $.ajax({
-            method: "POST",
+            type: "post",
             url: "/Test/Web/Producto/altaProducto",
             data: JSON.stringify(productoBean),
             contentType: "application/json",
             dataType: "json",
-            async: false,
+            //async: false,
 
+            /*
             beforeSend: function(request) {
-                //console.log(request);
-                //request.setRequestHeader("Autorizacion", "YWRtaW46YWRtaW4=");
             },
+            */
             success: function (data) {
                 console.log("Exito...");
                 console.log(data);
@@ -85,7 +84,9 @@ $(document).ready(function() {
             error: function (xhr, ajaxOptions, thrownError) {
                 console.log("Error.");
                 console.log(xhr.status);
+                console.log(xhr);
                 console.log(thrownError);
+                console.log(ajaxOptions);
             }
         });
         //request.abort();
