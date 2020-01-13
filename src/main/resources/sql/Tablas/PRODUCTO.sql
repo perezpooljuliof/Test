@@ -20,9 +20,10 @@ CREATE TABLE PRODUCTO (
     CantidadMinima      DECIMAL(6,2)    NOT NULL,
     CantidadMaxima      DECIMAL(6,2)    NOT NULL,
 
-    UUID                VARCHAR(50)     NOT NULL,       -- Identificador de la transaccion
+    UUID                BIGINT(20)      NOT NULL,       -- Identificador de la transaccion
     FechaAct            DATETIME        NOT NULL,       -- Fecha y hora de la ultima actualizacion
     IDUsuario           INT             NOT NULL,       -- Ultimo usuario en realizar la actualizacion
+    Programa            VARCHAR(70)     NOT NULL,       -- URL o programa que realiza la ultima actualizacion
 
     PRIMARY KEY(IdProducto)
 )$$

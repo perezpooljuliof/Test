@@ -29,6 +29,14 @@
     </bean>
 
     <bean id="mysqlAutoEjecutable" class="mx.com.core.db.MySQLAutoEjecutable" >
+        <property name="mySQLCallGenerator" ref="mySQLCallGenerator" />
+        <property name="longUtils" ref="longUtils" />
+    </bean>
+
+    <bean id="mySQLCallGenerator" class="mx.com.core.db.MySQLCallGenerator" >
         <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean>
+
+    <bean id="longUtils" class="mx.com.core.utilidades.LongUtils" >
     </bean>
 </beans>

@@ -1,3 +1,4 @@
+/*
 package mx.com.example.test.application.producto.dao.store;
 
 import mx.com.core.db.BaseStore;
@@ -140,3 +141,4 @@ public class ProductoLis extends BaseStore {
         this.par_NumOpcion = par_NumOpcion;
     }
 }
+*/

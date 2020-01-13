@@ -1,40 +1,23 @@
 package mx.com.example.test.application.producto.dto;
 
 
-import mx.com.core.db.base.TipoLlamada;
-import mx.com.core.db.base.TransaccionBaseStore;
-import mx.com.core.db.param.Parameter;
+import mx.com.core.db.base.BaseResultado;
 
-
-public class Producto extends TransaccionBaseStore {
-    @Parameter(targets = {TipoLlamada.ALTA})
-    protected String idProducto;
-    @Parameter(targets = {TipoLlamada.ALTA})
-    protected String producto;
-    @Parameter(targets = {TipoLlamada.ALTA})
-    protected String costo;
-    @Parameter(targets = {TipoLlamada.ALTA})
-    protected String precio;
-    @Parameter(targets = {TipoLlamada.ALTA})
-    protected String codigoRapido;
-    @Parameter(targets = {TipoLlamada.ALTA})
-    protected String codigoBarras;
-    @Parameter(targets = {TipoLlamada.ALTA})
-    protected String tipoVentaProd;
-    @Parameter(targets = {TipoLlamada.ALTA})
-    protected String esGravable;
-    @Parameter(targets = {TipoLlamada.ALTA})
-    protected String esIEPS;
-    @Parameter(targets = {TipoLlamada.ALTA})
-    protected String esISH;
-    @Parameter(targets = {TipoLlamada.ALTA})
-    protected String estatus;
-    @Parameter(targets = {TipoLlamada.ALTA})
-    protected String idDepartamento;
-    @Parameter(targets = {TipoLlamada.ALTA})
-    protected String cantidadMinima;
-    @Parameter(targets = {TipoLlamada.ALTA})
-    protected String cantidadMaxima;
+public class ProductoWrapper extends BaseResultado {
+    private String idProducto;
+    private String producto;
+    private String costo;
+    private String precio;
+    private String codigoRapido;
+    private String codigoBarras;
+    private String tipoVentaProd;
+    private String esGravable;
+    private String esIEPS;
+    private String esISH;
+    private String estatus;
+    private String idDepartamento;
+    private String cantidadMinima;
+    private String cantidadMaxima;
 
     public String getIdProducto() {
         return idProducto;

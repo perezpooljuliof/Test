@@ -31,23 +31,24 @@
 
     <!-- Autentificacion para Servicios Web -->
     <http use-expressions="true" pattern="/**">
-        <intercept-url pattern="/Web/Producto/Login" access="permitAll" />
+        <!-- Pagina de Login habilitada siempre -->
+        <intercept-url pattern="/Web/Login" access="permitAll" />
 
-        <!-- Resources -->
+        <!-- Recursos -->
         <intercept-url pattern="/resources/**" access="permitAll" />
         <intercept-url pattern="/js/**" access="permitAll" />
         <intercept-url pattern="/css/**" access="permitAll" />
 
         <intercept-url pattern="/**" access="isAuthenticated()" />
 
-        <form-login login-page='/Web/Producto/Login'
-                    login-processing-url="/Web/Producto/appLogin"
+        <form-login login-page='/Web/Login'
+                    login-processing-url="/Web/appLogin"
                     username-parameter="app_username"
                     password-parameter="app_password"
                     default-target-url="/Web/Producto/Inventario"
-                    authentication-failure-url="/Web/Producto/Login?error"
+                    authentication-failure-url="/Web/Login?error"
                     always-use-default-target="true"/>
-        <logout logout-success-url="/Web/Producto/Login?logout" />
+        <logout logout-success-url="/Web/Login?logout" />
         <csrf disabled="true"/>
     </http>
 

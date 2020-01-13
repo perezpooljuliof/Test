@@ -1,3 +1,4 @@
+/*
 package mx.com.example.test.application.producto.dao.store;
 
 import mx.com.core.db.ParamAccess;
@@ -135,3 +136,4 @@ public class ProductoAlt extends TransaccionBaseStore {
         this.par_CantidadMaxima = par_CantidadMaxima;
     }
 }
+*/

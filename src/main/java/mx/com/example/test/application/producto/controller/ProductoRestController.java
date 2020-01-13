@@ -1,8 +1,9 @@
 package mx.com.example.test.application.producto.controller;
 
 
-import mx.com.core.db.BaseResultado;
-import mx.com.example.test.application.producto.dto.Producto;
+
+import mx.com.core.db.base.BaseResultado;
+import mx.com.example.test.application.producto.dto.ProductoWrapper;
 import mx.com.example.test.application.producto.service.ProductoService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,22 +39,15 @@ public class ProductoRestController {
 	}
 
 	@RequestMapping(value="/Admin/altaProducto", method = RequestMethod.POST)
-	public BaseResultado altaProducto(@RequestBody Producto producto) {
+	public BaseResultado altaProducto(@RequestBody ProductoWrapper productoWrapper) {
 		System.out.println(this.getClass().getSimpleName() + ".altaProducto");
-		BaseResultado resultado = productoService.alta(producto);
+		BaseResultado resultado = productoService.alta(productoWrapper);
 		return resultado;
 	}
 
 	@RequestMapping(value = {"/Admin/altaProducto2"}, method = RequestMethod.POST)
-	public BaseResultado altaProducto2(@RequestBody Producto producto) {
-		BaseResultado resultado = productoService.alta(producto);
-		return resultado;
-	}
-
-	@RequestMapping(value="/Admin/altaProductoTest", method = RequestMethod.POST)
-	public BaseResultado altaProducto3(@RequestBody Producto producto) {
-		System.out.println(this.getClass().getSimpleName() + ".altaProducto");
-		BaseResultado resultado = new BaseResultado();
+	public BaseResultado altaProducto2(@RequestBody ProductoWrapper productoWrapper) {
+		BaseResultado resultado = productoService.alta(productoWrapper);
 		return resultado;
 	}
 }

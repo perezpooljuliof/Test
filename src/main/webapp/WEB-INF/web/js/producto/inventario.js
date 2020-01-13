@@ -44,30 +44,34 @@ $(document).ready(function() {
         consumeAltaProducto();
     });
 
-    function consumeAltaProducto() {
-        console.log("consumeAltaProducto(8)>>>>>>>>>>>>>>>>>>>");
-        // Send the data using post
-        var productoBean = {
-        "idProducto":"1",
-        "producto":"Sabriton",
-        "costo":"0.0",
-        "precio":"0.0",
-        "codigoRapido":"344",
-        "codigoBarras":"3445566",
-        "tipoVentaProd":"",
-        "esGravable":"",
-        "esIEPS":"",
-        "esISH":"",
-        "estatus":"",
-        "idDepartamento":"",
-        "cantidadMinima":"12",
-        "cantidadMaxima":"22"
-       };
+    function getProductoBeanFromFields() {
+        var idProducto = $("#idProducto").val();
+        var nombre = $("#nombre").val();
+        var costo = $("#costo").val();
+        var precio = $("#precio").val();
+        var codigoBarras = $("#codigoRapido").val();
+        var codigoRapido = $("#codigoRapido").val();
 
+        var productoBean = {
+            "idProducto":idProducto,
+            "producto":nombre,
+            "costo":costo,
+            "precio":precio,
+            "codigoRapido":codigoRapido,
+            "codigoBarras":codigoBarras
+        };
+        return productoBean;
+    }
+
+    function consumeAltaProducto() {
+        console.log("consumeAltaProducto()>>>>>>>>>>>>>>>>>>>");
+        // Send the data using post
+
+        var productoBean = getProductoBeanFromFields();
         console.log(JSON.stringify(productoBean));
         request = $.ajax({
             type: "post",
-            url: "/Test/Web/Producto/altaProducto",
+            url: "/Test/Web/Producto/AltaProducto",
             data: JSON.stringify(productoBean),
             contentType: "application/json",
             dataType: "json",

@@ -1,10 +1,10 @@
 DELIMITER ;
 
-DROP PROCEDURE IF EXISTS MAESTROLLAVESPRO;
+DROP PROCEDURE IF EXISTS AMOLLAVESPRO;
 
 DELIMITER $$
 
-CREATE PROCEDURE MAESTROLLAVESPRO (
+CREATE PROCEDURE AMOLLAVESPRO (
 	-- Stored procedure para generar el siguiente ID de una tabla
 	Par_Tabla                   VARCHAR(30),        -- Nombre de la tabla
 	INOUT Par_ID                BIGINT(20),         -- Identificador de la tabla

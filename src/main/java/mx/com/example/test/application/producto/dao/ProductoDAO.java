@@ -1,42 +1,42 @@
 package mx.com.example.test.application.producto.dao;
 
-import mx.com.core.db.BaseResultado;
+
 import mx.com.core.db.MySQLAutoEjecutable;
-import mx.com.example.test.application.producto.dao.store.ProductoAlt;
-import mx.com.example.test.application.producto.dao.store.ProductoLis;
+import mx.com.core.db.base.BaseResultado;
 import mx.com.example.test.application.producto.dto.Producto;
+import mx.com.example.test.application.producto.dto.ProductoWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public class ProductoDAO {
-
     @Autowired
     private MySQLAutoEjecutable mySQLAutoEjecutable;
 
-    public BaseResultado alta(Producto producto) {
+
+    public BaseResultado alta(ProductoWrapper producto) {
         BaseResultado resultado = null;
 
-        ProductoAlt productoDAO = new ProductoAlt();
-        productoDAO.setPar_IDProducto(0);
-        productoDAO.setPar_Producto(producto.getProducto());
-        productoDAO.setPar_Costo(Double.parseDouble(producto.getCosto()));
-        productoDAO.setPar_Precio(Double.parseDouble(producto.getPrecio()));
-        productoDAO.setPar_CodigoBarras(producto.getCodigoBarras());
-        productoDAO.setPar_TipoVentaProd("U");
-        productoDAO.setPar_EsGravable("N");
-        productoDAO.setPar_EsIEPS("N");
-        productoDAO.setPar_EsISH("N");
-        productoDAO.setPar_CantidadMinima(Double.parseDouble(producto.getCantidadMinima()));
-        productoDAO.setPar_CantidadMaxima(Double.parseDouble(producto.getCantidadMinima()));
-        productoDAO.setPar_MostrarResultado("S");
-        productoDAO.setPar_IDUsuario(1);
-        productoDAO.setPar_UUID("123");
+        Producto productoBD = new Producto();
+        productoBD.setProducto(producto.getProducto());
+        productoBD.setCosto(producto.getCosto());
+        productoBD.setPrecio(producto.getPrecio());
+        productoBD.setCodigoBarras(producto.getCodigoBarras());
+        productoBD.setTipoVentaProd("U");
+        productoBD.setEsGravable("N");
+        productoBD.setEsIEPS("N");
+        productoBD.setEsISH("N");
+        productoBD.setCantidadMinima(producto.getCantidadMinima());
+        productoBD.setCantidadMaxima(producto.getCantidadMaxima());
+
+        productoBD.setMostrarResultado("S");
+        productoBD.setIdUsuario(1);
+        productoBD.setUuid(mySQLAutoEjecutable.generateUniqueID());
+        productoBD.setPrograma(producto.getPrograma());
 
         try {
-            resultado = mySQLAutoEjecutable.getResult(productoDAO, BaseResultado.class);
+            resultado = mySQLAutoEjecutable.alta(productoBD, BaseResultado.class);
+            System.out.println(resultado.getNumResultado() + "-" + resultado.getResultado());
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -45,14 +45,15 @@ public class ProductoDAO {
         return resultado;
     }
 
-    public List<Producto> lista() {
-        List<Producto> lista = null;
+    /*
+    public List<ProductoBD> lista() {
+        List<ProductoBD> lista = null;
         ProductoLis productoLis = new ProductoLis();
         productoLis.setPar_NumOpcion(1);
 
 
         try {
-            lista = mySQLAutoEjecutable.getList(productoLis, Producto.class);
+            lista = mySQLAutoEjecutable.getList(productoLis, ProductoBD.class);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -60,23 +61,24 @@ public class ProductoDAO {
 
         return lista;
     }
+    */
 
     /*
     public static void main(String[] args) {
 
+        MySQLAutoEjecutable mysql = new MySQLAutoEjecutable();
+        mysql.setLongUtils(new LongUtils());
 
-        ProductoLis productoLis = new ProductoLis();
-        productoLis.setPar_NumOpcion(1);
+        MySQ
+
+        ProductoWrapper productoWrapper = new ProductoWrapper();
+        productoWrapper.setPrecio("2.0");
+
 
         try {
-            MySQLAutoEjecutable dao = new MySQLAutoEjecutable();
-
-            System.out.println(resultado.getNumResultado() + " " + resultado.getResultado());
-
-            List<Producto> productos = dao.getList(productoLis, Producto.class);
-            for(Producto producto: productos) {
-                System.out.println(producto);
-            }
+            ProductoDAO productoDAO = new ProductoDAO();
+            productoDAO.setMySQLAutoEjecutable(mysql);
+            productoDAO.alta(productoWrapper);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -85,4 +87,11 @@ public class ProductoDAO {
     }
     */
 
+    public MySQLAutoEjecutable getMySQLAutoEjecutable() {
+        return mySQLAutoEjecutable;
+    }
+
+    public void setMySQLAutoEjecutable(MySQLAutoEjecutable mySQLAutoEjecutable) {
+        this.mySQLAutoEjecutable = mySQLAutoEjecutable;
+    }
 }

@@ -15,7 +15,7 @@
             <div class="msg">message: ${msg}</div>
         </c:if>
 
-	<form action="<%=request.getContextPath()%>/Web/Producto/appLogin" method="POST">
+	<form action="<%=request.getContextPath()%>/Web/appLogin" method="POST">
 		Enter UserName:	<input type="text" name="app_username"/><br/><br/>
 		Enter Password: <input type="password" name="app_password"/> <br/><br/>
 		<input type="submit" value="Login"/>

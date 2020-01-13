@@ -27,8 +27,9 @@ CREATE PROCEDURE PRODUCTOALT (
     INOUT Par_NumResultado      INT,                -- Numero de resultado
     INOUT Par_Resultado         VARCHAR(200),        -- Descripcion del resultado
 
-    Par_UUID                    VARCHAR(50),        -- Identificador de la transaccion
-    Par_IDUsuario               INT                 -- Ultimo usuario en realizar la actualizacion
+    Par_UUID                    BIGINT(20),        -- Identificador de la transaccion
+    Par_IDUsuario               INT,                -- Ultimo usuario en realizar la actualizacion
+    Par_Programa                VARCHAR(70)         -- URL o programa que realiza la ultima actualizacion
 )
 BEGIN
     -- Declaracion de variables
@@ -148,7 +149,7 @@ BEGIN
         END IF;
 
 
-        CALL MAESTROLLAVESPRO ('PRODUCTO', Var_IDProducto, Par_NumResultado, Par_Resultado);
+        CALL AMOLLAVESPRO ('PRODUCTO', Var_IDProducto, Par_NumResultado, Par_Resultado);
 
         IF(Par_NumResultado > 0) THEN
             LEAVE BODY;
@@ -158,13 +159,13 @@ BEGIN
                 IDProducto,         Producto,           Costo,              Precio,             TipoVentaProd,
                 EsIEPS,             EsISH,              EsGravable,         Estatus,            IDDepartamento,
                 CodigoRapido,       CodigoBarras,       CantidadMinima,     Cantidadmaxima,     UUID,
-                FechaAct,           IDUsuario
+                FechaAct,           IDUsuario,          Programa
             )
             VALUES(
                 Var_IDProducto,     Par_Producto,       Par_Costo,          Par_Precio,         Par_TipoVentaProd,
                 Par_EsIEPS,         Par_EsISH,          Par_EsGravable,     'A',                Par_IDDepartamento,
                 Par_CodigoRapido,   Par_CodigoBarras,   Par_CantidadMinima, Par_CantidadMaxima, Par_UUID,
-                NOW(),              Par_IDUsuario
+                NOW(),              Par_IDUsuario,      Par_Programa
             );
 
         SET Par_Resultado := 'Producto registrado correctamente.';
