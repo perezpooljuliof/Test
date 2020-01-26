@@ -13,7 +13,6 @@ public class ProductoDAO {
     @Autowired
     private MySQLAutoEjecutable mySQLAutoEjecutable;
 
-
     public BaseResultado alta(ProductoWrapper producto) {
         BaseResultado resultado = null;
 
@@ -21,6 +20,7 @@ public class ProductoDAO {
         productoBD.setProducto(producto.getProducto());
         productoBD.setCosto(producto.getCosto());
         productoBD.setPrecio(producto.getPrecio());
+        productoBD.setCodigoRapido(producto.getCodigoRapido());
         productoBD.setCodigoBarras(producto.getCodigoBarras());
         productoBD.setTipoVentaProd("U");
         productoBD.setEsGravable("N");
@@ -31,7 +31,7 @@ public class ProductoDAO {
 
         productoBD.setMostrarResultado("S");
         productoBD.setIdUsuario(1);
-        productoBD.setUuid(mySQLAutoEjecutable.generateUniqueID());
+        productoBD.setUuid(producto.getUuid());
         productoBD.setPrograma(producto.getPrograma());
 
         try {

@@ -130,4 +130,5 @@ public class ProductoWrapper extends BaseResultado {
     public void setCantidadMaxima(String cantidadMaxima) {
         this.cantidadMaxima = cantidadMaxima;
     }
+
 }

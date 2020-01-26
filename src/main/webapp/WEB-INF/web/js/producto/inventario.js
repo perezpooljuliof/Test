@@ -82,15 +82,16 @@ $(document).ready(function() {
             },
             */
             success: function (data) {
-                console.log("Exito...");
                 console.log(data);
+                var titulo = "Error";
+                if(data.numResultado == "0") {
+                    titulo = "Exito";
+                }
+                showMessage(titulo, data.resultado);
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 console.log("Error.");
-                console.log(xhr.status);
-                console.log(xhr);
-                console.log(thrownError);
-                console.log(ajaxOptions);
+                showMessage("Error", "Ocurrio un error inesperado.");
             }
         });
         //request.abort();

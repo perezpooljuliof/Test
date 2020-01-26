@@ -7,7 +7,7 @@ import mx.com.core.db.param.Parameter;
 
 
 public class Producto extends TransaccionBaseStore {
-    @Parameter(targets = {TipoLlamada.ALTA})
+    @Parameter(targets = {TipoLlamada.CONSULTA})
     protected String idProducto;
     @Parameter(targets = {TipoLlamada.ALTA})
     protected String producto;
