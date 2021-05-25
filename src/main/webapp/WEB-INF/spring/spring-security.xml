@@ -24,7 +24,7 @@
 
     <!-- Additional filter chain for normal users, matching all other requests -->
     <http use-expressions="true" pattern="/**">
-        <intercept-url pattern="/page/login" access="isAnonymous()" />
+        <intercept-url pattern="/page/login" access="permitAll" />
         <intercept-url pattern="/**" access="hasRole('ROLE_USER')" />
         <form-login login-page='/page/login'
                     login-processing-url="/page/appLogin"
